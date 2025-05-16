@@ -3,7 +3,7 @@ const supabase = useSupabaseClient()
 const email = ref('')
 
 const signInWithOtp = async () => {
-  const { error } = await supabase.auth.signInWithOtp({
+  const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
     options: {
       emailRedirectTo: 'https://filament-tracker.vercel.app/confirm',
