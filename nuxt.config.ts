@@ -2,7 +2,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/supabase'],
+  css: ['~/assets/css/main.css'],
+  modules: ['@nuxtjs/supabase','@nuxt/ui'],
   supabase: {
     redirectOptions: {
       login: '/login',
