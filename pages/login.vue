@@ -14,10 +14,10 @@ const signInWithOtp = async () => {
 </script>
 <template>
   <div>
-    <button @click="signInWithOtp">
+    <UButton @click="signInWithOtp">
       Sign In with E-Mail
-    </button>
-    <input
+    </UButton>
+    <UInput
       v-model="email"
       type="email"
     />
