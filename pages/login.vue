@@ -1,21 +1,18 @@
 <script setup lang="ts">
 const supabase = useSupabaseClient()
 const email = ref('')
-const pw = ref('')
+const password = ref('')
 
 const signInWithOtp = async () => {
   const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
-    password: pw.value,
-    options: {
-      emailRedirectTo: 'http://localhost:3000/confirm',
-    }
+    password: password.value,
   })
   if (error) console.log(error)
 }
 </script>
 <template>
-  <div>
+  <div class="flex flex-col w-full justify-center align-center">
     <UButton @click="signInWithOtp">
       Sign In with E-Mail + Password
     </UButton>
@@ -24,7 +21,7 @@ const signInWithOtp = async () => {
       type="email"
     />
     <UInput
-      v-model="pw"
+      v-model="password"
       type="password"
     />
   </div>
