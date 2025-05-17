@@ -26,7 +26,7 @@ const test_fil = ref([
 console.log("test data")
 console.log(test_fil)
 async function getfilaments() {
-  const { data, error } = await supabase.from('filaments').select()
+  const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer")
   filaments.value = data
   console.log(data)
   console.log("Database Data")
