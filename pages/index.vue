@@ -1,12 +1,16 @@
 <script setup>
-import { createClient } from '@supabase/supabase-js'
 const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
 async function getfilaments() {
-  const { data } = await supabase.from('filaments').select()
+  const { data: filaments } = await useAsyncData('filaments', async () => {
+    const { data } = await client.from('filaments').select()
+    return data
+  })
   filaments.value = data
+  if (error) console.log(error)
+  console.log("Database Data")
   console.log(filaments.value)
 }
 onMounted(() => {
