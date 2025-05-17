@@ -7,6 +7,7 @@ const filaments = ref([])
 async function getfilaments() {
   const { data } = await supabase.from('filaments').select()
   filaments.value = data
+  console.log(filaments.value)
 }
 onMounted(() => {
   getfilaments()
