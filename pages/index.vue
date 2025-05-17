@@ -2,7 +2,7 @@
 const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
-const filaments = ref([])
+const filaments = ref()
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select()
   filaments.value = data
@@ -32,6 +32,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <UTable :data="data" class="flex-1" />
+    <UTable :data="filaments.value" class="flex-1" />
   </div>
 </template>
