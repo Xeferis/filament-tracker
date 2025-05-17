@@ -2,7 +2,7 @@
 const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
-const filaments = ref()
+const filaments = ref([])
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select()
   filaments.value = data
