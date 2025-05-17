@@ -3,6 +3,13 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
+const columns = [
+  { key: 'id', label: 'ID' },
+  { key: 'type', label: 'Bezeichnung' },
+  { key: 'amount', label: 'Anzahl' },
+  { key: 'refill', label: 'Refill' },
+  // Add more keys as needed
+]
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select()
   filaments.value = data
