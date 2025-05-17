@@ -15,7 +15,11 @@ onMounted(() => {
 const LogOut = async () => {
   console.log("sign out user")
   const { error } = await supabase.auth.signOut()
-  if (error) console.log(error)
+  if (error) {
+    console.log(error)
+  } else {
+    navigateTo("/")
+  }
 }
 </script>
 <template>

@@ -7,10 +7,12 @@ const signIn = async () => {
   const {data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-    
   })
-  if (error) console.log(error)
-  if (data) redirect("/")
+  if (error) {
+    console.log(error)
+  } else {
+    navigateTo("/")
+  }
 }
 </script>
 <template>
