@@ -4,8 +4,8 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
 async function getfilaments() {
-  const { data: filaments } = await useAsyncData('filaments', async () => {
-    const { data } = await client.from('filaments').select()
+  const { data } = await useAsyncData('filaments', async () => {
+    const { data } = await supabase.from('filaments').select()
     return data
   })
   filaments.value = data
