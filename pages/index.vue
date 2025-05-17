@@ -9,7 +9,6 @@ async function getfilaments() {
     return data
   })
   filaments.value = data
-  if (error) console.log(error)
   console.log("Database Data")
   console.log(filaments.value)
 }
