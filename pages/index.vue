@@ -58,6 +58,6 @@ const LogOut = async () => {
     <UDivider></UDivider>
     <p v-for="fil2 in test_fil">{{ fil2 }}</p>
 
-    <UTable :data="test_fil" class="flex-1" />
+    <UTable :data="filaments" class="flex-1" />
   </div>
 </template>
