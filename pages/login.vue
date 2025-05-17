@@ -3,7 +3,7 @@ const supabase = useSupabaseClient()
 const email = ref('')
 const password = ref('')
 
-const signInWithOtp = async () => {
+const signIn = async () => {
   const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
@@ -21,7 +21,7 @@ const signInWithOtp = async () => {
       v-model="password"
       type="password"
     />
-    <UButton @click="signInWithOtp">
+    <UButton @click="signIn">
       Sign In with E-Mail + Password
     </UButton>
   </div>
