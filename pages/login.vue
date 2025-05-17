@@ -16,8 +16,8 @@ const signIn = async () => {
 }
 </script>
 <template>
-  <div class="flex w-full h-full justify-center content-center">
-    <div class="flex flex-col h-fit w-64 p-4 bg-slate-500">
+  <div class="flex w-full h-full justify-center items-center">
+    <div class="flex flex-col h-fit w-64 p-4 bg-slate-500 rounded-sm">
       <UInput
         class="my-2"
         placeholder="e-mail"
