@@ -23,6 +23,15 @@ const LogOut = async () => {
     navigateTo("/login")
   }
 }
+
+type col = {
+  id: string
+  type: string
+  location: string
+  refill: bool
+  amount: number
+}
+
 </script>
 <template>
   <div>
@@ -31,6 +40,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <UTable :data="filaments" class="flex-1" />
+    <UTable :data="filaments" :columns="col" class="flex-1" />
   </div>
 </template>
