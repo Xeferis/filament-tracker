@@ -24,14 +24,6 @@ const LogOut = async () => {
   }
 }
 
-type col = {
-  id: string
-  type: string
-  location: string
-  refill: bool
-  amount: number
-}
-
 </script>
 <template>
   <div>
@@ -40,6 +32,6 @@ type col = {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <UTable :data="filaments" :columns="col" class="flex-1" />
+    <UTable :data="data" class="flex-1" />
   </div>
 </template>
