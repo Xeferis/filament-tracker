@@ -18,7 +18,7 @@ const LogOut = async () => {
   if (error) {
     console.log(error)
   } else {
-    navigateTo("/")
+    navigateTo("/login")
   }
 }
 </script>
