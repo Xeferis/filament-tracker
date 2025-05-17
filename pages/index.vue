@@ -31,6 +31,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <UTable loading loading-color="primary" loading-animation="carousel" :data="filaments" class="flex-1" />
+    <UTable :data="filaments" class="flex-1" />
   </div>
 </template>
