@@ -17,18 +17,20 @@ const signIn = async () => {
 </script>
 <template>
   <div class="flex w-full h-full justify-center content-center">
-    <div class="flex flex-col w-64 p-4 bg-slate-500">
+    <div class="flex flex-col h-fit w-64 p-4 bg-slate-500">
       <UInput
+        class="my-2"
         placeholder="e-mail"
         v-model="email"
         type="email"
       />
       <UInput
+        class="my-2"
         placeholder="password"
         v-model="password"
         type="password"
       />
-      <UButton @click="signIn">
+      <UButton class="mt-5" @click="signIn">
         Sign In
       </UButton>
     </div>

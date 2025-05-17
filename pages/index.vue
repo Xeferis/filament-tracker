@@ -31,8 +31,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <ul>
-      <li v-for="filament in filaments" :key="filament.id">{{ filament.type }}</li>
-    </ul>
+    <UTable loading loading-color="primary" loading-animation="carousel" :data="filaments" class="flex-1" />
   </div>
 </template>
