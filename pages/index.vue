@@ -28,7 +28,9 @@ const LogOut = async () => {
     <p>{{ user.email }}</p>
   </div>
   <UButton @click="LogOut">LogOut</UButton>
-  <ul>
-    <li v-for="filament in filaments" :key="filament.id">{{ filament.type }}</li>
-  </ul>
+  <div class="w-full">
+    <ul>
+      <li v-for="filament in filaments" :key="filament.id">{{ filament.type }}</li>
+    </ul>
+  </div>
 </template>
