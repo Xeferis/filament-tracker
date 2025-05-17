@@ -23,6 +23,8 @@ const test_fil = ref([
   type: "Test glns",
   }
 ])
+console.log("test data")
+console.log(test_fil)
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select()
   filaments.value = data
