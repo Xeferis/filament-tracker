@@ -15,15 +15,17 @@ const signIn = async () => {
   <div class="flex w-full h-full justify-center content-center">
     <div class="flex flex-col w-64 p-4 bg-slate-500">
       <UInput
+        placeholder="e-mail"
         v-model="email"
         type="email"
       />
       <UInput
+        placeholder="password"
         v-model="password"
         type="password"
       />
       <UButton @click="signIn">
-        Sign In with E-Mail + Password
+        Sign In
       </UButton>
     </div>
   </div>
