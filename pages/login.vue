@@ -11,7 +11,7 @@ const signIn = async () => {
   if (error) {
     console.log(error)
   } else {
-    navigateTo("/confirm")
+    navigateTo("/")
   }
 }
 </script>
