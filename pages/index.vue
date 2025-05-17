@@ -32,7 +32,7 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <p v-for="fil in filaments">{{ fil.type }}</p>
+    <p v-for="fil in data">{{ fil }}</p>
 
     <UTable :data="filaments" class="flex-1" />
   </div>
