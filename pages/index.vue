@@ -3,6 +3,26 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
+const test_fil = ref([
+  {
+  amount: 1
+  created_at: "2025-05-17T07:14:37.469169+00:00"
+  id: 2
+  location: "70b0528a-7108-4961-93b2-d6a72d047560"
+  manufacturer: "Bambulab"
+  refill: false
+  type: "Test Matte"
+  },
+  {
+  amount: 1
+  created_at: "2025-05-17T07:14:37.469169+00:00"
+  id: 3
+  location: "70b0528a-7108-4961-93b2-d6a72d047560"
+  manufacturer: "Bambulab"
+  refill: false
+  type: "Test glns"
+  }
+])
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select()
   filaments.value = data
@@ -32,8 +52,10 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <p v-for="fil in data">{{ fil }}</p>
+    <p v-for="fil in filaments">{{ fil }}</p>
+    <UDivider></UDivider>
+    <p v-for="fil2 in test_fil">{{ fil2 }}</p>
 
-    <UTable :data="filaments" class="flex-1" />
+    <UTable :data="test_fil" class="flex-1" />
   </div>
 </template>
