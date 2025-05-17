@@ -5,22 +5,22 @@ const user = useSupabaseUser()
 const filaments = ref([])
 const test_fil = ref([
   {
-  amount: 1
-  created_at: "2025-05-17T07:14:37.469169+00:00"
-  id: 2
-  location: "70b0528a-7108-4961-93b2-d6a72d047560"
-  manufacturer: "Bambulab"
-  refill: false
-  type: "Test Matte"
+  amount: 1,
+  created_at: "2025-05-17T07:14:37.469169+00:00",
+  id: 2,
+  location: "70b0528a-7108-4961-93b2-d6a72d047560",
+  manufacturer: "Bambulab",
+  refill: false,
+  type: "Test Matte",
   },
   {
-  amount: 1
-  created_at: "2025-05-17T07:14:37.469169+00:00"
-  id: 3
-  location: "70b0528a-7108-4961-93b2-d6a72d047560"
-  manufacturer: "Bambulab"
-  refill: false
-  type: "Test glns"
+  amount: 1,
+  created_at: "2025-05-17T07:14:37.469169+00:00",
+  id: 3,
+  location: "70b0528a-7108-4961-93b2-d6a72d047560",
+  manufacturer: "Bambulab",
+  refill: false,
+  type: "Test glns",
   }
 ])
 async function getfilaments() {
