@@ -4,11 +4,13 @@ const email = ref('')
 const password = ref('')
 
 const signIn = async () => {
-  const { error } = await supabase.auth.signInWithPassword({
+  const {data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
+    
   })
   if (error) console.log(error)
+  if (data) redirect("/")
 }
 </script>
 <template>
