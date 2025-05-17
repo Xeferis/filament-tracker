@@ -1,7 +1,8 @@
 <script setup>
 import { createClient } from '@supabase/supabase-js'
 const config = useRuntimeConfig()
-const supabase = createClient(config.public.supabaseUrl, config.public.supabaseAnonKey)
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
 const filaments = ref([])
 async function getfilaments() {
   const { data } = await supabase.from('filaments').select()
@@ -18,6 +19,10 @@ const LogOut = async () => {
 }
 </script>
 <template>
+  <div>
+    <p>logged in User:</p>
+    <p>{{ user.email }}</p>
+  </div>
   <UButton @click="logout">LogOut</UButton>
   <ul>
     <li v-for="filament in filaments" :key="filament.id">{{ filament.type }}</li>
