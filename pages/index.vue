@@ -4,7 +4,7 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const test = ref([])
 
-onMounted(() => {
+onMounted(async () => {
   const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
   test.value.push(data)
 })
