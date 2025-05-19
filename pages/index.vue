@@ -15,6 +15,14 @@ onMounted(() => {
   getfilaments()
 })
 
+const columns = [
+  { key: 'type', label: 'Type' },
+  { key: 'manufacturer', label: 'Hersteller' },
+  { key: 'refill', label: 'refill' },
+  { key: 'amount', label: 'Amount' },
+  { key: 'location', label: 'Location' }
+]
+
 const LogOut = async () => {
   console.log("sign out user")
   const { error } = await supabase.auth.signOut()
@@ -50,6 +58,6 @@ const LogOut = async () => {
       </tr>
     </table>
 
-    <UTable :data="filaments" />
+    <UTable :columns="columns" :data="filaments" />
   </div>
 </template>
