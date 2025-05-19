@@ -34,8 +34,8 @@ const LogOut = async () => {
     <p>{{ user.email }}</p>
   </div>
   <UButton @click="LogOut">LogOut</UButton>
-  <div class="flex justify-center items-center w-full">
-    <table class="table-auto">
+  <div class="flex flex-col justify-center items-center w-full">
+    <table class="border-collapse border border-gray-400 table-auto">
       <thead>
         <tr>
           <th>Type</th>
