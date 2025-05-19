@@ -3,7 +3,12 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const { data, error, statusText } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
+const { data: filaments } = await useAsyncData('filaments', async () => {
+  const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
+
+  return data
+})
+
 
 const LogOut = async () => {
   console.log("sign out user")
@@ -23,6 +28,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="flex flex-col justify-center items-center w-full">
-    <UTable :data="data" :loading="statusText === 'pending'" />
+    <UTable :data="filaments" />
   </div>
 </template>
