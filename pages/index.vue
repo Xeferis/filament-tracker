@@ -49,5 +49,7 @@ const LogOut = async () => {
         <td>{{fil.location}}</td>
       </tr>
     </table>
+
+    <UTable :data="filaments" />
   </div>
 </template>
