@@ -3,10 +3,12 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
+const testfil = ref([])
 
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
   filaments.value = data
+  testfil = data
 }
 onMounted(() => {
   getfilaments()
@@ -50,6 +52,6 @@ const LogOut = async () => {
         </tr>
       </tbody>
     </table>
-    <UTable :data="filaments" />
+    <UTable :data="testfil" />
   </div>
 </template>
