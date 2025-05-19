@@ -53,5 +53,6 @@ const LogOut = async () => {
         </tr>
       </tbody>
     </table>
+    <UTable :data="filaments"/>
   </div>
 </template>
