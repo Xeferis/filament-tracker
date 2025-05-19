@@ -3,12 +3,15 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
-let testfil = ref([])
+const testfil = ref([
+  { type: "PLA", manufacturer: "Prusa", refill: false, amount: 1, location: "A1" },
+  { type: "PLA", manufacturer: "Prusa", refill: false, amount: 1, location: "A2" },
+  { type: "PLA", manufacturer: "Prusa", refill: false, amount: 1, location: "A3" },
+])
 
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
   filaments.value = data
-  testfil = data
 }
 onMounted(() => {
   getfilaments()
