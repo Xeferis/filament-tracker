@@ -3,8 +3,8 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const { data: filaments } = await useAsyncData('filaments', async () => {
-  const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
+const { data: filaments } = await useAsyncData('filaments', () => {
+  const { data, status } = supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
 
   return data
 })
