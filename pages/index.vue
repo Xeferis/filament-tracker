@@ -3,11 +3,7 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const { filaments } = await useAsyncData('filaments', async () => {
-  const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
-
-  return data
-})
+const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
 
 
 const LogOut = async () => {
@@ -28,6 +24,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="flex flex-col justify-center items-center w-full">
-    <UTable :data="filaments" />
+    <UTable :data="data" />
   </div>
 </template>
