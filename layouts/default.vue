@@ -15,7 +15,7 @@ const LogOut = async () => {
 
 <template>
   <div>
-    <div class="flex w-full h-24 justify-evenly items-center">
+    <div class="flex w-full h-24 mb-4 justify-evenly items-center">
       <div>
         <p>logged in User:</p>
         <p class="text-primary">{{ user?.email }}</p>
