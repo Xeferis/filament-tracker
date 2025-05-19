@@ -12,6 +12,8 @@ const testfil = ref([
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
   filaments.value = data
+  console.log("filaments", filaments.value.type)
+  console.log("filaments", testfil.value.type)
 }
 onMounted(() => {
   getfilaments()
