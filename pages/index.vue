@@ -3,28 +3,7 @@ const config = useRuntimeConfig()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
-const test_fil = ref([
-  {
-  amount: 1,
-  created_at: "2025-05-17T07:14:37.469169+00:00",
-  id: 2,
-  location: "70b0528a-7108-4961-93b2-d6a72d047560",
-  manufacturer: "Bambulab",
-  refill: false,
-  type: "Test Matte",
-  },
-  {
-  amount: 1,
-  created_at: "2025-05-17T07:14:37.469169+00:00",
-  id: 3,
-  location: "70b0528a-7108-4961-93b2-d6a72d047560",
-  manufacturer: "Bambulab",
-  refill: false,
-  type: "Test glns",
-  }
-])
-console.log("test data")
-console.log(test_fil)
+
 async function getfilaments() {
   const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer")
   filaments.value = data
@@ -54,10 +33,21 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <p v-for="fil in filaments">{{ fil }}</p>
-    <UDivider></UDivider>
-    <p v-for="fil2 in test_fil">{{ fil2 }}</p>
-
-    <UTable :data="filaments" class="flex-1" />
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Hersteller</th>
+        <th>refill</th>
+        <th>Amount</th>
+        <th>Location</th>
+      </tr>
+      <tr v-for="fil in filaments">
+        <td>fil.type</td>
+        <td>fil.manufacturer</td>
+        <td>fil.refill</td>
+        <td>fil.amount</td>
+        <td>fil.location</td>
+      </tr>
+    </table>
   </div>
 </template>
