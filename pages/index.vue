@@ -4,12 +4,7 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const test = ref([])
 
-onMounted(async () => {
-  const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
-  test.value.push(data)
-})
-
-
+const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
 
 const LogOut = async () => {
   console.log("sign out user")
@@ -29,6 +24,6 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="flex flex-col justify-center items-center w-full">
-    <UTable :data="test" />
+    <UTable :data="data" />
   </div>
 </template>
