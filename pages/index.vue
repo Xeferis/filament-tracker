@@ -4,12 +4,8 @@ const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const filaments = ref([])
 
-async function getfilaments() {
-  const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
-  filaments.value = data
-}
-
-getfilaments()
+const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, location")
+filaments.value = data
 
 
 const LogOut = async () => {
@@ -50,6 +46,6 @@ const LogOut = async () => {
         </tr>
       </tbody>
     </table>
-    <UTable :data="filaments" />
+    <UTable :data="data" />
   </div>
 </template>
