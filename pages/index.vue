@@ -41,23 +41,25 @@ const LogOut = async () => {
   </div>
   <UButton @click="LogOut">LogOut</UButton>
   <div class="w-full">
-    <table>
-      <tr>
-        <th>Type</th>
-        <th>Hersteller</th>
-        <th>refill</th>
-        <th>Amount</th>
-        <th>Location</th>
-      </tr>
-      <tr v-for="fil in filaments">
-        <td>{{fil.type}}</td>
-        <td>{{fil.manufacturer}}</td>
-        <td>{{fil.refill}}</td>
-        <td>{{fil.amount}}</td>
-        <td>{{fil.location}}</td>
-      </tr>
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Hersteller</th>
+          <th>refill</th>
+          <th>Amount</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="fil in filaments">
+          <td>{{fil.type}}</td>
+          <td>{{fil.manufacturer}}</td>
+          <td>{{fil.refill}}</td>
+          <td>{{fil.amount}}</td>
+          <td>{{fil.location}}</td>
+        </tr>
+      </tbody>
     </table>
-
-    <UTable :columns="columns" :data="filaments" />
   </div>
 </template>
