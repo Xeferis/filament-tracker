@@ -42,11 +42,11 @@ const LogOut = async () => {
         <th>Location</th>
       </tr>
       <tr v-for="fil in filaments">
-        <td>fil.type</td>
-        <td>fil.manufacturer</td>
-        <td>fil.refill</td>
-        <td>fil.amount</td>
-        <td>fil.location</td>
+        <td>{{fil.type}}</td>
+        <td>{{fil.manufacturer}}</td>
+        <td>{{fil.refill}}</td>
+        <td>{{fil.amount}}</td>
+        <td>{{fil.location}}</td>
       </tr>
     </table>
   </div>
