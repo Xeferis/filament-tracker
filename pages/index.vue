@@ -18,11 +18,6 @@ const LogOut = async () => {
 
 </script>
 <template>
-  <div>
-    <p>logged in User:</p>
-    <p>{{ user.email }}</p>
-  </div>
-  <UButton @click="LogOut">LogOut</UButton>
   <div class="flex flex-col justify-center items-center w-full">
     <UTable :data="data" />
   </div>
