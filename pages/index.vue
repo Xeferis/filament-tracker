@@ -50,5 +50,27 @@ const LogOut = async () => {
         </tr>
       </tbody>
     </table>
+    <UTable
+      :data="filaments"
+      :columns="[
+        { key: 'type', label: 'Type' },
+        { key: 'manufacturer', label: 'Hersteller' },
+        { key: 'refill', label: 'refill' },
+        { key: 'amount', label: 'Amount' },
+        { key: 'location', label: 'Location' }
+      ]"
+      :options="{ perPage: 10 }"
+      :pagination="{ page: 1, rowsPerPage: 10 }"
+      :loading="false"
+      :loadingText="'Loading...'"
+      :noDataText="'No data available'"
+      :noResultsText="'No results found'"
+      :emptyText="'No data available'"
+      :emptySlot="false"
+      :showPagination="true"
+      :showPageSize="true"
+      :showPageSizes="[5, 10, 20]"
+      :showPageSizeSelect="true"
+      :showPageSizeSelectAll="true" />
   </div>
 </template>
