@@ -185,7 +185,7 @@ onUnmounted(() => {
               color="primary"
               variant="soft"
             ></UButton>
-            <p>{{ modal_amount }}</p>
+            <p class="font-bold w-8">{{ modal_amount }}</p>
             <UButton
               :disable="modal_amount < 100"
               class="ml-2"
