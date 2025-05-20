@@ -5,7 +5,11 @@ const amount = ref(0)
 const refill = ref(false)
 const manufacturer = ref('')
 const selected = ref(null)
-const dd_value = ref([])
+const dd_value = ref([{
+    label: "-",
+    value: null,
+}])
+const current = ref(null)
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     const { data, error } = await supabase.from('locations').select()
@@ -19,7 +23,7 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
         }
     })
     console.log(helper)
-    dd_value.value = helper
+    dd_value.value.push(helper)
     return data
 })
 
@@ -57,7 +61,7 @@ const addFilament = async () => {
           v-model="manufacturer"
         />
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" />
-        <UInputMenu class="my-2" v-model="dd_value[0]" :items="dd_value"/>
+        <UInputMenu class="my-2" v-model="current" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
