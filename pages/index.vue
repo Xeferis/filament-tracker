@@ -80,7 +80,7 @@ const globalFilter = ref('')
       <div class="flex px-4 py-3.5 border-b border-accented">
         <UInput v-model="globalFilter" class="max-w-sm" placeholder="Filter..." />
       </div>
-      <UTable :data="data" :columns="columns" class="flex-1" />
+      <UTable ref="table" v-model:global-filter="globalFilter" :data="data" :columns="columns" class="flex-1" />
     </div>
   </div>
 </template>
