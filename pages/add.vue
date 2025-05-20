@@ -140,19 +140,41 @@ const addFilament = async () => {
         <h3 class="text-center mb-5">
           Please enter the filament details:
         </h3>
-        <UInputMenu required class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+
+        <div class="my-2">
+          <UInputMenu v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+          <p class="text-red mt-0">required</p>
+        </div>
         
-        <UInputMenu required class="my-2" v-model="clr_selected" placeholder="Farbe" :items="color"/>
-        <UInputMenu required class="my-2" v-model="mtrl_selected" placeholder="Material" :items="material"/>
-        <UInput
-          required
-          class="my-2"
-          placeholder="Bezeichnung"
-          v-model="type"
-        />
-        <UInputNumber required v-model="amount" Label="Anzahl"/>
+        <div class="my-2">
+        <UInputMenu v-model="clr_selected" placeholder="Farbe" :items="color"/>
+        <p class="text-red mt-0">required</p>
+        </div>
+
+        <div class="my-2">
+          <UInputMenu v-model="mtrl_selected" placeholder="Material" :items="material"/>
+          <p class="text-red mt-0">required</p>
+        </div>
+
+        <div class="my-2">
+          <UInput
+            placeholder="Bezeichnung"
+            v-model="type"
+          />
+          <p class="text-red mt-0">required</p>
+        </div>
+
+        <div class="my-2">
+          <UInputNumber v-model="amount" Label="Anzahl"/>
+          <p class="text-red mt-0">required</p>
+        </div>
+
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
-        <UInputMenu required class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
+        
+        <div class="my-2">
+          <UInputMenu :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
+          <p class="text-red mt-0">required</p>
+        </div>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
