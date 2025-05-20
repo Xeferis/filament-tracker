@@ -5,18 +5,16 @@ const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
 const selected = ref(null)
+const dd_value = ref([])
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     const { data, error } = await supabase.from('locations').select()
 
     if (error) throw error
     console.log(data)
+    dd_value.value = data
     return data
 })
-
-const dd_value = computed(() => options || [])
-
-console.log(options)
 
 const addFilament = async () => {
     console.log("add filament")
