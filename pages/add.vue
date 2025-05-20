@@ -44,7 +44,7 @@ const addFilament = async () => {
       amount: amount.value,
       refill: refill.value,
       manufacturer: manufacturer.value,
-      location_id: dd_selected.value.value
+      location: dd_selected.value.value
     }).select()
 
     if (error) {
