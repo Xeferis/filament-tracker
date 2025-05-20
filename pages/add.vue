@@ -6,17 +6,12 @@ const refill = ref(false)
 const manufacturer = ref('')
 const selected = ref(null)
 
-
-
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     const { data, error } = await supabase.from('locations').select()
 
     if (error) throw error
 
-    return data.map(item => ({
-        label: item.description,
-        value: item.id,
-    }))
+    return data
 })
 
 const dd_value = computed(() => options || [])
