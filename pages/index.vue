@@ -154,14 +154,56 @@ onUnmounted(() => {
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
       <div>
-        <p>{{ modal_id }}</p>
-        <p>{{ modal_location }}</p>
-        <p>{{ modal_type }}</p>
-        <p>{{ modal_color }}</p>
-        <p>{{ modal_material }}</p>
-        <p>{{ modal_amount }}</p>
-        <p>{{ modal_refill }}</p>
-        <p>{{ modal_manufacturer }}</p>
+        <div class="flex justify-between items-center mb-2">
+          <p>ID:</p>
+          <p>{{ modal_id }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Ort der Lagerung:</p>
+          <p>{{ modal_location }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Bezeichnung:</p>
+          <p>{{ modal_type }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Farbe:</p>
+          <p>{{ modal_color }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Material:</p>
+          <p>{{ modal_material }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Anzahl:</p>
+          <div>
+            <UButton
+              :disable="modal_amount > 0"
+              class="mr-2"
+              @click="modal_amount--"
+              icon="i-lucide-minus"
+              color="primary"
+              variant="soft"
+            ></UButton>
+            <p>{{ modal_amount }}</p>
+            <UButton
+              :disable="modal_amount < 100"
+              class="ml-2"
+              @click="modal_amount++"
+              icon="i-lucide-plus"
+              color="primary"
+              variant="soft"
+            ></UButton>
+          </div>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Refill Roll:</p>
+          <p>{{ modal_refill }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Hersteller:</p>
+          <p>{{ modal_manufacturer }}</p>
+        </div>
         <div class="flex justify-between items-center mt-4">
           <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
         </div>
