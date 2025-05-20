@@ -7,9 +7,9 @@ const manufacturer = ref('')
 const selected = ref(null)
 const dd_value = ref([{
     label: "-",
-    value: null,
+    value: "xxx",
 }])
-const current = ref(null)
+const current = ref("xxx")
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     const { data, error } = await supabase.from('locations').select()
@@ -21,9 +21,9 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
             label: item.description,
             value: item.id,
         }
-    })
+    }) || []
     console.log(helper)
-    dd_value.value.push(helper)
+    dd_value.value = helper
     return data
 })
 
