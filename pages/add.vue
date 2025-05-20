@@ -64,7 +64,7 @@ const addFilament = async () => {
           v-model="refill"
           label="Refill"
         />
-        <UInputMenu v-model="selected" :options="location" option-attribute="description" value-attribute="id"/>
+        <UInputMenu v-model="selected" :options="data" option-attribute="description" value-attribute="id"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
