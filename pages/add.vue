@@ -29,6 +29,15 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 })
 
 const addFilament = async () => {
+  const { error } = await supabase
+    .from('filaments')
+    .insert({
+      type: type.value,
+      amount: amount.value,
+      refill: refill.value,
+      manufacturer: manufacturer.value,
+      location_id: dd_selected.value.value
+    })
     console.log("add filament")
     console.log(type.value)
     console.log(amount.value)
