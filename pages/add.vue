@@ -7,11 +7,8 @@ const amount = ref(0)
 const refill = ref(false)
 const manufacturer = ref('')
 const selected = ref(null)
-const dd_value = ref([{
-    label: "-",
-    value: "loading",
-}])
-const current = ref("loading")
+const dd_value = ref(["loading ..."])
+const current = ref("loading ...")
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     dd_loading.value = true
@@ -26,7 +23,7 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
         }
     }) || []
     console.log(helper)
-    dd_value.value = helper
+    dd_value.value = data
     dd_loading.value = false
     return data
 })
