@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const supabase = useSupabaseClient()
 const type = ref('')
-const amount = ref()
+const amount = ref(0)
 const refill = ref(false)
 const manufacturer = ref('')
 const selected = ref(null)
@@ -43,11 +43,7 @@ const addFilament = async () => {
           placeholder="Filament Type"
           v-model="type"
         />
-        <UInput
-          class="my-2"
-          placeholder="Amount"
-          v-model="amount"
-        />
+        <UInputNumber v-model="amount" />
         <UInput
           class="my-2"
           placeholder="Manufacturer"
