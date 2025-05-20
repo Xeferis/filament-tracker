@@ -6,7 +6,7 @@ const type = ref('')
 const amount = ref(0)
 const refill = ref(false)
 const manufacturer = ref('')
-const selected = ref(null)
+const dd_selected = ref()
 const dd_value = ref([])
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
@@ -34,14 +34,14 @@ const addFilament = async () => {
     console.log(amount.value)
     console.log(refill.value)
     console.log(manufacturer.value)
-    console.log(dd_value.value)
+    console.log(dd_selected.value)
 }
 
 </script>
 <template>
   <div class="flex flex-col justify-center items-center p-10 w-full">
     <h3 class="text-4xl text-center mb-14">Add new Filament</h3>
-    <div class="flex flex-col w-4/5 md:w-full">
+    <div class="flex flex-col justify-center w-4/5 md:w-full">
       <div class="flex justify-end items-center mb-2">
         <UButton to="/">Back</UButton>
       </div>
@@ -62,7 +62,7 @@ const addFilament = async () => {
           v-model="manufacturer"
         />
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" />
-        <UInputMenu class="my-2" :loading="dd_loading" placeholder="Select location" :items="dd_value"/>
+        <UInputMenu class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
