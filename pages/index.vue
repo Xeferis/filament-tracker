@@ -100,21 +100,23 @@ function onSelect(row: TableRow<filament>, e?: Event) {
   modal_amount.value = row.original.amount
   modal_refill.value = row.original.refill
   modal_manufacturer.value = row.original.manufacturer
-  console.log(row.original)
+  console.log(row.original.id)
   console.log(e)
 }
 </script>
 <template>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
-      <p>{{ modal_id.value }}</p>
-      <p>{{ modal_location.value }}</p>
-      <p>{{ modal_type.value }}</p>
-      <p>{{ modal_color.value }}</p>
-      <p>{{ modal_material.value }}</p>
-      <p>{{ modal_amount.value }}</p>
-      <p>{{ modal_refill.value }}</p>
-      <p>{{ modal_manufacturer.value }}</p>
+      <div>
+        <p>{{ modal_id }}</p>
+        <p>{{ modal_location }}</p>
+        <p>{{ modal_type }}</p>
+        <p>{{ modal_color }}</p>
+        <p>{{ modal_material }}</p>
+        <p>{{ modal_amount }}</p>
+        <p>{{ modal_refill }}</p>
+        <p>{{ modal_manufacturer }}</p>
+      </div>
     </template>
   </UModal>
   <div class="flex flex-col justify-center items-center p-10 w-full">
