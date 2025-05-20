@@ -7,8 +7,7 @@ const amount = ref(0)
 const refill = ref(false)
 const manufacturer = ref('')
 const selected = ref(null)
-const dd_value = ref(["loading ..."])
-const current = ref("loading ...")
+const dd_value = ref([])
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     dd_loading.value = true
@@ -16,14 +15,15 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 
     if (error) throw error
     console.log(data)
-    const helper = data.map((item) => {
+
+    const helper = data?.map((item) => {
         return {
             label: item.description,
             value: item.id,
         }
-    }) || []
+    })
     console.log(helper)
-    dd_value.value = data
+    dd_value.value = helper || ["No locations found"]
     dd_loading.value = false
     return data
 })
@@ -62,7 +62,7 @@ const addFilament = async () => {
           v-model="manufacturer"
         />
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" />
-        <UInputMenu class="my-2" :loading="dd_loading" v-model="current" :items="dd_value"/>
+        <UInputMenu class="my-2" :loading="dd_loading" placeholder="Select location" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
