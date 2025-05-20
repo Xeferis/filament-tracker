@@ -6,7 +6,7 @@ const refill = ref(false)
 const manufacturer = ref('')
 const dd_value = ref([])
 
-const loc_data = await supabase.from('locations').select()
+const loc_data = supabase.from('locations').select()
 
 dd_value.value.push(loc_data.data)
 console.log(loc_data.data)
