@@ -182,7 +182,7 @@ onUnmounted(() => {
               class="mr-2"
               @click="modal_amount--"
               icon="i-lucide-minus"
-              color="primary"
+              color="success"
               variant="soft"
             ></UButton>
             <p class="font-bold w-8 text-center">{{ modal_amount }}</p>
@@ -191,7 +191,7 @@ onUnmounted(() => {
               class="ml-2"
               @click="modal_amount++"
               icon="i-lucide-plus"
-              color="primary"
+              color="success"
               variant="soft"
             ></UButton>
           </div>
