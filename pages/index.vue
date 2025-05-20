@@ -3,8 +3,19 @@ import type { TableColumn, TableRow } from '@nuxt/ui'
 import { h, resolveComponent } from 'vue'
 const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
+const open_modal = ref(false)
 const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
 // console.log(data) //#DEBUG
+
+const modal_id = ref()
+const modal_location = ref()
+const modal_type = ref()
+const modal_color = ref()
+const modal_material = ref()
+const modal_amount = ref()
+const modal_refill = ref()
+const modal_manufacturer = ref()
+
 
 type filament = {
   id: String
@@ -80,11 +91,32 @@ const rowSelection = ref<Record<string, boolean>>({})
 
 function onSelect(row: TableRow<filament>, e?: Event) {
   /* If you decide to also select the column you can do this  */
+  open_modal.value = !open_modal.value
+  modal_id.value = row.original.id
+  modal_location.value = row.original.location
+  modal_type.value = row.original.type
+  modal_color.value = row.original.color
+  modal_material.value = row.original.material
+  modal_amount.value = row.original.amount
+  modal_refill.value = row.original.refill
+  modal_manufacturer.value = row.original.manufacturer
   console.log(row.original)
   console.log(e)
 }
 </script>
 <template>
+  <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
+    <template #body>
+      <p>{{ modal_id.value }}</p>
+      <p>{{ modal_location.value }}</p>
+      <p>{{ modal_type.value }}</p>
+      <p>{{ modal_color.value }}</p>
+      <p>{{ modal_material.value }}</p>
+      <p>{{ modal_amount.value }}</p>
+      <p>{{ modal_refill.value }}</p>
+      <p>{{ modal_manufacturer.value }}</p>
+    </template>
+  </UModal>
   <div class="flex flex-col justify-center items-center p-10 w-full">
     <h1 class="text-6xl text-center mb-14">Current Filament Supply</h1>
     <div class="flex flex-col md:w-4/5 w-full">
