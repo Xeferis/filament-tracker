@@ -20,6 +20,51 @@ const manufacturer = ref([
   'Zaxe',
 ])
 const manu_selected = ref()
+const color = ref([
+  'Schwarz',
+  'Weiß',
+  'Blau',
+  'Grün',
+  'Rot',
+  'Grau',
+  'Orange',
+  'Natur',
+  'Gelb',
+  'Transparent',
+  'Lila',
+  'Silber',
+  'Braun',
+  'Pink',
+  'Gold',
+  'Türkis',
+  'Beige',
+  'Bronze',
+  'Schwarz-Rot',
+])
+const clr_selected = ref()
+const material = ref([
+  'PLA',
+  'PETG',
+  'ABS',
+  'Flexibel TPU/TPE',
+  'Nylon (PA)',
+  'Carbonfaser',
+  'ASA',
+  'PLA Max',
+  'PLA Silk',
+  'PVA/BVOH/BreakAway',
+  'Glasfaser',
+  'PVB',
+  'Flexible',
+  'PETG Max',
+  'PC',
+  'PP',
+  'PC-ABS',
+  'Wood',
+  'PPS',
+  'PC-FR',
+])
+const mtrl_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
 
@@ -44,6 +89,8 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 
 interface Filament {
   type: string
+  color: string
+  material: string
   amount: number
   refill: boolean
   manufacturer: string
@@ -56,6 +103,8 @@ const addFilament = async () => {
     .insert<Filament>({
       type: type.value,
       amount: amount.value,
+      color: clr_selected.value,
+      material: mtrl_selected.value,
       refill: refill.value,
       manufacturer: manu_selected.value,
       location: dd_selected.value.value
@@ -87,12 +136,9 @@ const addFilament = async () => {
           placeholder="Bezeichnung"
           v-model="type"
         />
+        <UInputMenu class="my-2" v-model="clr_selected" placeholder="Farbe" :items="color"/>
+        <UInputMenu class="my-2" v-model="mtrl_selected" placeholder="Material" :items="material"/>
         <UInputNumber v-model="amount" Label="Anzahl"/>
-        <UInput
-          class="my-2"
-          placeholder="Hersteller"
-          v-model="manufacturer"
-        />
         <UInputMenu class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
 
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
