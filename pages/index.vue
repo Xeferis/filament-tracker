@@ -67,6 +67,8 @@ const columns: TableColumn<filament>[] = [
     }
   },
 ]
+
+const globalFilter = ref('')
 </script>
 <template>
   <div class="flex flex-col justify-center items-center p-10 w-full">
@@ -74,6 +76,9 @@ const columns: TableColumn<filament>[] = [
     <div class="flex flex-col md:w-4/5 w-full">
       <div class="flex justify-end items-center mb-2">
         <UButton to="/add">Add</UButton>
+      </div>
+      <div class="flex px-4 py-3.5 border-b border-accented">
+        <UInput v-model="globalFilter" class="max-w-sm" placeholder="Filter..." />
       </div>
       <UTable :data="data" :columns="columns" class="flex-1" />
     </div>
