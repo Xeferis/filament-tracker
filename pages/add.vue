@@ -51,15 +51,8 @@ const addFilament = async () => {
         console.error('Error inserting data:', error)
     } else {
         console.log('Data inserted successfully:', data)
+        navigateTo('/')
     }
-
-
-    console.log("add filament")
-    console.log(type.value)
-    console.log(amount.value)
-    console.log(refill.value)
-    console.log(manufacturer.value)
-    console.log(dd_selected.value.value)
 }
 
 </script>
