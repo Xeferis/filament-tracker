@@ -5,7 +5,7 @@ const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
 
-const { data, error } = supabase.from('locations').select()
+const { data, error } = await supabase.from('locations').select()
 if (error) {
 console.log(error)
 } else {
