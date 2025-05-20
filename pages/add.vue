@@ -6,14 +6,14 @@ const refill = ref(false)
 const manufacturer = ref('')
 const dd_value = ref([])
 
-const { data: locations } = await useAsyncData('locations', async () => {
-  const { data } = await supabase.from('locations').select()
-  return data
+onMounted(() => {
+  const { data: locations } = await useAsyncData('locations', async () => {
+    const { data } = await supabase.from('locations').select()
+    return data
+  })
+  dd_value.value = locations
+  console.log(locations)
 })
-
-
-dd_value.value.push(locations)
-console.log(locations)
 
 const addFilament = async () => {
   const { data, error } = await supabase
