@@ -5,7 +5,7 @@ const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
 
-const loc_data = await supabase.from('locations').select()
+const loc_data = await supabase.from('filaments').select()
 
 console.log(loc_data)
 
