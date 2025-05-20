@@ -86,7 +86,7 @@ const columns: TableColumn<filament>[] = [
 ]
 const errortoast = useToast()
 
-function deleteFilament(id: string) {
+async function deleteFilament(id: string) {
   const { error } = await supabase.from('filaments').delete().eq('id', id)
   if (error) {
     console.error('Error deleting filament:', error)
