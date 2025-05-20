@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { loadNuxtConfig } from 'nuxt/kit'
 
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
