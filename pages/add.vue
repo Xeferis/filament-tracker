@@ -14,10 +14,11 @@ onMounted(async () => {
 
     if (!error) {
         dd_value.value = data.map(item => ({
-            label: item.name,
+            label: item.description,
             value: item.id,
     }))
     }
+    console.log(dd_value.value)
 })
 
 const addFilament = async () => {
