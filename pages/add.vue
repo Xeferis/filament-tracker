@@ -12,7 +12,14 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 
     if (error) throw error
     console.log(data)
-    dd_value.value = data
+    const helper = data.map((item) => {
+        return {
+            label: item.description,
+            value: item.id,
+        }
+    })
+    console.log(helper)
+    dd_value.value = helper
     return data
 })
 
