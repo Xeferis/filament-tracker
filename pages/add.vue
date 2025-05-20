@@ -6,10 +6,14 @@ const refill = ref(false)
 const manufacturer = ref('')
 const dd_value = ref([])
 
-const loc_data = supabase.from('locations').select()
+const { data: locations } = await useAsyncData('locations', async () => {
+  const { data } = await client.from('locations').select()
+  return data
+})
 
-dd_value.value.push(loc_data.data)
-console.log(loc_data.data)
+
+dd_value.value.push(locations)
+console.log(locations)
 
 const addFilament = async () => {
   const { data, error } = await supabase
