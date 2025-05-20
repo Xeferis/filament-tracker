@@ -35,7 +35,6 @@ const addFilament = async () => {
     console.log(refill.value)
     console.log(manufacturer.value)
     console.log(dd_selected.value.value)
-    console.log(dd_selected)
 }
 
 </script>
