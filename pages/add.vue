@@ -34,15 +34,16 @@ const addFilament = async () => {
     console.log(amount.value)
     console.log(refill.value)
     console.log(manufacturer.value)
-    console.log(dd_selected.value)
+    console.log(dd_selected.value.value)
+    console.log(dd_selected)
 }
 
 </script>
 <template>
   <div class="flex flex-col justify-center items-center p-10 w-full">
     <h3 class="text-4xl text-center mb-14">Add new Filament</h3>
-    <div class="flex flex-col justify-center w-4/5 md:w-full">
-      <div class="flex justify-end items-center mb-2">
+    <div class="flex flex-col justify-center items-center w-4/5 md:w-full">
+      <div class="flex justify-start items-center mb-4">
         <UButton to="/">Back</UButton>
       </div>
       <div class="flex flex-col h-fit w-80 p-4 bg-neutral-800 shadow-2xl shadow-neutral-200 rounded-xl">
