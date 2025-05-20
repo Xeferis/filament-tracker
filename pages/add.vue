@@ -4,10 +4,12 @@ const type = ref('')
 const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
+const dd_value = ref([])
 
 const loc_data = await supabase.from('filaments').select()
 
-console.log(loc_data)
+dd_value.push(loc_data.data)
+console.log(loc_data.data)
 
 const addFilament = async () => {
   const { data, error } = await supabase
@@ -52,7 +54,7 @@ const addFilament = async () => {
           v-model="manufacturer"
         />
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" />
-        <UInputMenu class="my-2" v-model="loc_data[0]" :options="loc_data" option-attribute="description" value-attribute="id"/>
+        <UInputMenu class="my-2" v-model="dd_value[0]" :options="dd_value" option-attribute="description" value-attribute="id"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
