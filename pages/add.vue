@@ -12,11 +12,12 @@ if (error) {
   console.log(location)
 }
 
+
 const addFilament = async () => {
   const { data, error } = await supabase
     .from('filaments')
     .insert([
-      { type: type.value, amount: amount.value, manufacturer: manufacturer.value }
+      { type: type.value, amount: amount.value, manufacturer: manufacturer.value, refill: refill.value, location: location.value }
     ])
   if (error) {
     console.log(error)
@@ -46,7 +47,7 @@ const addFilament = async () => {
         />
         <UInput
           class="my-2"
-          placeholder="Amount (g)"
+          placeholder="Amount"
           v-model="amount"
         />
         <UInput
@@ -63,7 +64,7 @@ const addFilament = async () => {
         <UInput
             class="my-2"
             type="select"
-            :options="location.name"
+            :options="location.map((loc) => ({ label: loc.name, value: loc.id }))"
             label="Location"
             v-model="location"
         />
