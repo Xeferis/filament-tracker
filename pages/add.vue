@@ -16,7 +16,7 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 
 const dd_value = computed(() => options || [])
 
-console.log(dd_value.value)
+console.log(options)
 
 const addFilament = async () => {
   const { data, error } = await supabase
