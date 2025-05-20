@@ -4,11 +4,9 @@ const type = ref('')
 const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
-const dd_value = ref([])
 
-
-const { data: locations } = async () => {
-    const { data, error } = await supabase.from('locations').select('id, description')
+const { data: locations } = () => {
+    const { data, error } = supabase.from('locations').select('id, description')
     if (error) {
     console.log(error)
     } else {
@@ -16,9 +14,6 @@ const { data: locations } = async () => {
     }
     return data
 }
-
-dd_value.value = locations
-
 
 const addFilament = async () => {
   const { data, error } = await supabase
@@ -68,7 +63,7 @@ const addFilament = async () => {
           v-model="refill"
           label="Refill"
         />
-        <UInputMenu v-model="dd_value[0]" :options="dd_value" option-attribute="description" value-attribute="id"/>
+        <UInputMenu v-model="locations[0]" :options="locations" option-attribute="description" value-attribute="id"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
