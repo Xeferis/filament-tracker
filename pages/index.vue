@@ -104,7 +104,8 @@ async function deleteFilament(id: string) {
         description: 'Fehler beim Abrufen der Daten',
       })
     } else {
-      data.value = data
+      navigateTo('/')
+      // Update the data in the table
     }
   }
 }
