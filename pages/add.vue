@@ -19,8 +19,6 @@ const { data: locations } = async () => {
 
 dd_value.value = locations
 
-const selected = ref(locations[0])
-
 
 const addFilament = async () => {
   const { data, error } = await supabase
@@ -70,7 +68,7 @@ const addFilament = async () => {
           v-model="refill"
           label="Refill"
         />
-        <UInputMenu v-model="selected" :options="dd_value" option-attribute="description" value-attribute="id"/>
+        <UInputMenu v-model="dd_value[0]" :options="dd_value" option-attribute="description" value-attribute="id"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
