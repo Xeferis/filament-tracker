@@ -5,7 +5,21 @@ const dd_loading = ref(false)
 const type = ref('')
 const amount = ref(0)
 const refill = ref(false)
-const manufacturer = ref('')
+const manufacturer = ref([
+  'BambuLab',
+  '3DXTech',
+  'PolyMaker',
+  'Raise 3D',
+  'Formfutura',
+  'Flashforge',
+  'Azurefilm',
+  'eSun',
+  'Extrudr',
+  'TreeD',
+  'PPprint',
+  'Zaxe',
+])
+const manu_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
 
@@ -43,7 +57,7 @@ const addFilament = async () => {
       type: type.value,
       amount: amount.value,
       refill: refill.value,
-      manufacturer: manufacturer.value,
+      manufacturer: manu_selected.value,
       location: dd_selected.value.value
     }).select()
 
@@ -70,15 +84,17 @@ const addFilament = async () => {
         </h3>
         <UInput
           class="my-2"
-          placeholder="Filament Type"
+          placeholder="Bezeichnung"
           v-model="type"
         />
-        <UInputNumber v-model="amount" />
+        <UInputNumber v-model="amount" Label="Anzahl"/>
         <UInput
           class="my-2"
-          placeholder="Manufacturer"
+          placeholder="Hersteller"
           v-model="manufacturer"
         />
+        <UInputMenu class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
         <UInputMenu class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
