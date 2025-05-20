@@ -143,17 +143,17 @@ const addFilament = async () => {
 
         <div class="my-2">
           <UInputMenu class="w-full" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
-          <p class="text-red text-xs mt-0">required</p>
+          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
         
         <div class="my-2">
         <UInputMenu class="w-full"  v-model="clr_selected" placeholder="Farbe" :items="color"/>
-        <p class="text-red text-xs mt-0">required</p>
+        <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
         <div class="my-2">
           <UInputMenu class="w-full"  v-model="mtrl_selected" placeholder="Material" :items="material"/>
-          <p class="text-red text-xs mt-0">required</p>
+          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
         <div class="my-2">
@@ -162,19 +162,19 @@ const addFilament = async () => {
             placeholder="Bezeichnung"
             v-model="type"
           />
-          <p class="text-red text-xs mt-0">required</p>
+          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
         <div class="my-2 ">
           <UInputNumber class="w-full" v-model="amount" Label="Anzahl"/>
-          <p class="text-red text-xs mt-0">required</p>
+          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
         
         <div class="my-2">
           <UInputMenu class="w-full"  :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
-          <p class="text-red text-xs mt-0">required</p>
+          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
