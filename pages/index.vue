@@ -176,7 +176,7 @@ onUnmounted(() => {
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Anzahl:</p>
-          <div class="flex flex-col justify-center items-center">
+          <div class="flex justify-center items-center">
             <UButton
               :disable="modal_amount > 0"
               class="mr-2"
