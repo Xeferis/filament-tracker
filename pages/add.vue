@@ -13,7 +13,7 @@ if (error) {
 }
 
 
-const selected = ref(location[0].description)
+const selected = ref(location[0])
 
 
 const addFilament = async () => {
