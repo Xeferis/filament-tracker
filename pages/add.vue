@@ -7,7 +7,7 @@ const manufacturer = ref('')
 const dd_value = ref([])
 
 const { data: locations } = await useAsyncData('locations', async () => {
-  const { data } = await client.from('locations').select()
+  const { data } = await supabase.from('locations').select()
   return data
 })
 
