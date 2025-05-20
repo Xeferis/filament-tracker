@@ -40,7 +40,7 @@ const columns: TableColumn<filament>[] = [
       }[row.getValue('refill') as string]
 
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-        row.getValue('refill') as string
+        [row.getValue('refill') as string]
       )
     }
   },
