@@ -5,6 +5,7 @@ const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
 const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
 console.log(data)
+
 type filament = {
   id: String
   location: String
@@ -23,7 +24,7 @@ const columns: TableColumn<filament>[] = [
     cell: ({ row }) => `#${row.getValue('id')}`
   },
   {
-    accessorKey: 'location.description',
+    accessorKey: 'locations.description',
     header: 'Ort der Lagerung',
   },
   {
