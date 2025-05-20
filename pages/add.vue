@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { loadNuxtConfig } from 'nuxt/kit'
+
 const supabase = useSupabaseClient()
+const dd_loading = ref(false)
 const type = ref('')
 const amount = ref(0)
 const refill = ref(false)
@@ -7,11 +10,12 @@ const manufacturer = ref('')
 const selected = ref(null)
 const dd_value = ref([{
     label: "-",
-    value: "xxx",
+    value: "loading",
 }])
-const current = ref("xxx")
+const current = ref("loading")
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
+    dd_loading.value = true
     const { data, error } = await supabase.from('locations').select()
 
     if (error) throw error
@@ -24,6 +28,7 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
     }) || []
     console.log(helper)
     dd_value.value = helper
+    dd_loading.value = false
     return data
 })
 
@@ -61,7 +66,7 @@ const addFilament = async () => {
           v-model="manufacturer"
         />
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" />
-        <UInputMenu class="my-2" v-model="current" :items="dd_value"/>
+        <UInputMenu class="my-2" :loading="dd_loading" v-model="current" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
