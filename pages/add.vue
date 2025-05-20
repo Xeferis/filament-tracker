@@ -8,7 +8,7 @@ const dd_value = ref([])
 
 const loc_data = await supabase.from('filaments').select()
 
-dd_value.push(loc_data.data)
+dd_value.value.push(loc_data.data)
 console.log(loc_data.data)
 
 const addFilament = async () => {
