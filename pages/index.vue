@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn, TableRow } from '@nuxt/ui'
 import { h, resolveComponent } from 'vue'
 const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
@@ -75,6 +75,14 @@ const columns: TableColumn<filament>[] = [
 ]
 
 const globalFilter = ref('')
+
+const rowSelection = ref<Record<string, boolean>>({})
+
+function onSelect(row: TableRow<filament>, e?: Event) {
+  /* If you decide to also select the column you can do this  */
+  console.log(row)
+  console.log(e)
+}
 </script>
 <template>
   <div class="flex flex-col justify-center items-center p-10 w-full">
@@ -86,7 +94,7 @@ const globalFilter = ref('')
       <div class="flex px-4 py-3.5 border-b border-accented">
         <UInput v-model="globalFilter" class="max-w-sm" placeholder="Filter..." />
       </div>
-      <UTable ref="table" v-model:global-filter="globalFilter" :data="data" :columns="columns" class="flex-1" />
+      <UTable ref="table" v-model:global-filter="globalFilter" :data="data" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
     </div>
   </div>
 </template>
