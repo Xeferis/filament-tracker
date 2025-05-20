@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { RealtimeChannel } from '@supabase/supabase-js'
 import { h, resolveComponent } from 'vue'
+let realtimeChannel: RealtimeChannel
 const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
 const open_modal = ref(false)
-const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
+
+const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filaments', async () => {
+  const { data } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
+  return data
+})
+
+//const { data, status} = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
 // console.log(data) //#DEBUG
 
 const modal_id = ref()
@@ -93,24 +101,28 @@ async function deleteFilament(id: string) {
     errortoast.add({
       title: 'Fehler',
       description: 'Fehler beim Löschen des Filaments',
+      color: 'error',
     })
-  } else {
-    // Refresh the data after deletion
-    const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
-    if (error) {
-      console.error('Error fetching data:', error)
-      errortoast.add({
-        title: 'Fehler',
-        description: 'Fehler beim Abrufen der Daten',
-      })
-    } else {
-      console.log('Data fetched successfully:', data)
-      errortoast.add({
-        title: 'Erfolg',
-        description: 'Filament erfolgreich gelöscht',
-      })
-    }
-  }
+  } 
+  // else {
+  //   // Refresh the data after deletion
+  //   const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
+  //   if (error) {
+  //     console.error('Error fetching data:', error)
+  //     errortoast.add({
+  //       title: 'Fehler',
+  //       description: 'Fehler beim Abrufen der Daten',
+  //       color: 'error',
+  //     })
+  //   } else {
+  //     console.log('Data fetched successfully:', data)
+  //     errortoast.add({
+  //       title: 'Erfolg',
+  //       description: 'Filament erfolgreich gelöscht',
+  //       color: 'success',
+  //     })
+  //   }
+  // }
 }
 
 const globalFilter = ref('')
@@ -159,7 +171,7 @@ function onSelect(row: TableRow<filament>, e?: Event) {
       <div class="flex px-4 py-3.5 border-b border-accented">
         <UInput v-model="globalFilter" class="max-w-sm" placeholder="Filter..." />
       </div>
-      <UTable ref="table" v-model:global-filter="globalFilter" :data="data" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
+      <UTable ref="table" v-model:global-filter="globalFilter" :data="filaments" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
     </div>
   </div>
 </template>
