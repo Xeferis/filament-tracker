@@ -1,8 +1,8 @@
 <template>
-  <UAPP>
+  <UApp>
     <NuxtLoadingIndicator color="orange" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </UAPP>
+  </UApp>
 </template>
