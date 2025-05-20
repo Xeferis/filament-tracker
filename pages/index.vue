@@ -3,10 +3,11 @@ import type { TableColumn } from '@nuxt/ui'
 import { h, resolveComponent } from 'vue'
 const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
-const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material")
+const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
 
 type filament = {
   id: String
+  location: String
   type: String
   color: String
   material: String
@@ -20,6 +21,10 @@ const columns: TableColumn<filament>[] = [
     accessorKey: 'id',
     header: '#ID',
     cell: ({ row }) => `#${row.getValue('id')}`
+  },
+  {
+    accessorKey: 'location.description',
+    header: 'Ort der Lagerung',
   },
   {
     accessorKey: 'type',
