@@ -12,7 +12,6 @@ const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filam
   return data
 })
 
-//const { data, status} = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
 // console.log(data) //#DEBUG
 
 const modal_id = ref()
@@ -103,26 +102,15 @@ async function deleteFilament(id: string) {
       description: 'Fehler beim Löschen des Filaments',
       color: 'error',
     })
-  } 
-  // else {
-  //   // Refresh the data after deletion
-  //   const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
-  //   if (error) {
-  //     console.error('Error fetching data:', error)
-  //     errortoast.add({
-  //       title: 'Fehler',
-  //       description: 'Fehler beim Abrufen der Daten',
-  //       color: 'error',
-  //     })
-  //   } else {
-  //     console.log('Data fetched successfully:', data)
-  //     errortoast.add({
-  //       title: 'Erfolg',
-  //       description: 'Filament erfolgreich gelöscht',
-  //       color: 'success',
-  //     })
-  //   }
-  // }
+  } else {
+    errortoast.add({
+      title: 'Erfolg',
+      description: 'Filament erfolgreich gelöscht',
+      color: 'success',
+    })
+    // Refresh the data after deletion
+    refreshNuxtData('filaments')
+  }
 }
 
 const globalFilter = ref('')
