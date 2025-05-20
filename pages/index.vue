@@ -84,6 +84,30 @@ const columns: TableColumn<filament>[] = [
     }
   },
 ]
+const errortoast = useToast()
+
+function deleteFilament(id: string) {
+  const { error } = await supabase.from('filaments').delete().eq('id', id)
+  if (error) {
+    console.error('Error deleting filament:', error)
+    errortoast.add({
+      title: 'Fehler',
+      description: 'Fehler beim Löschen des Filaments',
+    })
+  } else {
+    // Refresh the data after deletion
+    const { data, error } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
+    if (error) {
+      console.error('Error fetching data:', error)
+      errortoast.add({
+        title: 'Fehler',
+        description: 'Fehler beim Abrufen der Daten',
+      })
+    } else {
+      data.value = data
+    }
+  }
+}
 
 const globalFilter = ref('')
 
@@ -117,6 +141,7 @@ function onSelect(row: TableRow<filament>, e?: Event) {
         <p>{{ modal_refill }}</p>
         <p>{{ modal_manufacturer }}</p>
       </div>
+      <UButton @click="deleteFilament(modal_id)">Delete</UButton>
     </template>
   </UModal>
   <div class="flex flex-col justify-center items-center p-10 w-full">
