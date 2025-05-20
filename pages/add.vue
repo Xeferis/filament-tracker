@@ -5,15 +5,15 @@ const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
 
-const { location, error } = await supabase.from('locations').select('id, description')
+const { data, error } = await supabase.from('locations').select('id, description')
 if (error) {
   console.log(error)
 } else {
-  console.log(location)
+  console.log(data)
 }
 
 
-const selected = ref(location[0])
+const selected = ref(data[0])
 
 
 const addFilament = async () => {
