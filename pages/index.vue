@@ -80,7 +80,7 @@ const rowSelection = ref<Record<string, boolean>>({})
 
 function onSelect(row: TableRow<filament>, e?: Event) {
   /* If you decide to also select the column you can do this  */
-  console.log(row)
+  console.log(row.getAllCells)
   console.log(e)
 }
 </script>
