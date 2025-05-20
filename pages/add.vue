@@ -47,6 +47,12 @@ const addFilament = async () => {
       location_id: dd_selected.value.value
     }).select()
 
+    if (error) {
+        console.error('Error inserting data:', error)
+    } else {
+        console.log('Data inserted successfully:', data)
+    }
+
 
     console.log("add filament")
     console.log(type.value)
