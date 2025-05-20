@@ -143,6 +143,23 @@ function onSelect(row: TableRow<filament>, e?: Event) {
   console.log(row.original.id)
   console.log(e)
 }
+
+onMounted(() => {
+  // Real time listener for new workouts
+  realtimeChannel = supabase.channel('public:filaments').on(
+    'postgres_changes',
+    { event: '*', schema: 'public', table: 'filaments' },
+    () => refreshFilaments()
+  )
+
+  realtimeChannel.subscribe()
+})
+
+  // Don't forget to unsubscribe when user left the page
+onUnmounted(() => {
+  supabase.removeChannel(realtimeChannel)
+})
+
 </script>
 <template>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
