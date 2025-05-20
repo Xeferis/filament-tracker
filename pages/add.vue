@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const supabase = useSupabaseClient()
 const type = ref('')
 const amount = ref()
@@ -22,7 +22,7 @@ const addFilament = async () => {
   const { data, error } = await supabase
     .from('filaments')
     .insert([
-      { type: type.value, amount: amount.value, manufacturer: manufacturer.value, refill: refill.value, location: location.value }
+      { type: type.value, amount: amount.value, manufacturer: manufacturer.value, refill: refill.value, location: dd_value.value }
     ])
   if (error) {
     console.log(error)
