@@ -17,7 +17,7 @@ const LogOut = async () => {
   <div>
     <div class="flex w-full h-24 mb-4 justify-evenly items-center">
       <div>
-        <p>logged in User:</p>
+        <p>logged in as:</p>
         <p class="text-primary">{{ user?.email }}</p>
       </div>
       <UButton @click="LogOut">LogOut</UButton>

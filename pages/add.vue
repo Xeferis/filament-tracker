@@ -61,7 +61,7 @@ const addFilament = async () => {
           placeholder="Manufacturer"
           v-model="manufacturer"
         />
-        <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" />
+        <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
         <UInputMenu class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
