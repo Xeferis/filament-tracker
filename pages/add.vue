@@ -4,22 +4,22 @@ const type = ref('')
 const amount = ref()
 const refill = ref(false)
 const manufacturer = ref('')
-const dd_value = ref([])
 const selected = ref(null)
 
 
 
-onMounted(async () => {
+const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     const { data, error } = await supabase.from('locations').select()
 
-    if (!error) {
-        dd_value.value = data.map(item => ({
-            label: item.description,
-            value: item.id,
+    if (error) throw error
+
+    return data.map(item => ({
+        label: item.description,
+        value: item.id,
     }))
-    }
-    console.log(dd_value.value)
 })
+
+const dd_value = computed(() => options.value || [])
 
 const addFilament = async () => {
   const { data, error } = await supabase
