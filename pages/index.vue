@@ -25,9 +25,9 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'amount',
-    header: 'Anzahl',
+    header: () => h('div', { class: 'text-center' }, 'Anzahl'),
     cell: ({ row }) => {
-      return h('div', { class: 'text-center font-medium' }, row.getValue('amount'))
+      return h('div', { class: 'text-center font-bold' }, row.getValue('amount'))
     }
   },
   {
