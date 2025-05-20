@@ -131,16 +131,16 @@ const addFilament = async () => {
         <h3 class="text-center mb-5">
           Please enter the filament details:
         </h3>
+        <UInputMenu class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+        
+        <UInputMenu class="my-2" v-model="clr_selected" placeholder="Farbe" :items="color"/>
+        <UInputMenu class="my-2" v-model="mtrl_selected" placeholder="Material" :items="material"/>
         <UInput
           class="my-2"
           placeholder="Bezeichnung"
           v-model="type"
         />
-        <UInputMenu class="my-2" v-model="clr_selected" placeholder="Farbe" :items="color"/>
-        <UInputMenu class="my-2" v-model="mtrl_selected" placeholder="Material" :items="material"/>
         <UInputNumber v-model="amount" Label="Anzahl"/>
-        <UInputMenu class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
-
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
         <UInputMenu class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
