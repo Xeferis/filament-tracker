@@ -141,8 +141,10 @@ function onSelect(row: TableRow<filament>, e?: Event) {
         <p>{{ modal_amount }}</p>
         <p>{{ modal_refill }}</p>
         <p>{{ modal_manufacturer }}</p>
+        <div class="flex justify-between items-center mt-4">
+          <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
+        </div>
       </div>
-      <UButton @click="deleteFilament(modal_id)">Delete</UButton>
     </template>
   </UModal>
   <div class="flex flex-col justify-center items-center p-10 w-full">
