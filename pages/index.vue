@@ -16,7 +16,7 @@ type filament = {
 const columns: TableColumn<filament>[] = [
   {
     accessorKey: 'id',
-    header: '#',
+    header: '#ID',
     cell: ({ row }) => `#${row.getValue('id')}`
   },
   {
@@ -25,7 +25,10 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'amount',
-    header: 'Anzahl'
+    header: 'Anzahl',
+    cell: ({ row }) => {
+      return h('div', { class: 'text-center font-medium' }, row.getValue('amount'))
+    }
   },
   {
     accessorKey: 'refill',
@@ -37,7 +40,7 @@ const columns: TableColumn<filament>[] = [
       }[row.getValue('refill') as string]
 
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-        row.getValue('refill')
+        row.getValue('refill') as string
       )
     }
   },
