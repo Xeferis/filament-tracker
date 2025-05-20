@@ -4,7 +4,7 @@ import { h, resolveComponent } from 'vue'
 const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
 const { data, status } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
-
+console.log(data)
 type filament = {
   id: String
   location: String
