@@ -97,8 +97,11 @@ interface Filament {
   location_id: number
 }
 
+const errortoast = useToast()
+
 const addFilament = async () => {
-  const { data, error } = await supabase
+  if (type.value && amount.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
+    const { data, error } = await supabase
     .from('filaments')
     .insert<Filament>({
       type: type.value,
@@ -116,6 +119,12 @@ const addFilament = async () => {
         console.log('Data inserted successfully:', data)
         navigateTo('/')
     }
+  } else {
+    errortoast.add({
+      title: 'Uh oh! Something went wrong.',
+      description: 'Please enter all required values!',
+    })
+  }
 }
 
 </script>
@@ -131,18 +140,19 @@ const addFilament = async () => {
         <h3 class="text-center mb-5">
           Please enter the filament details:
         </h3>
-        <UInputMenu class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+        <UInputMenu required class="my-2" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
         
-        <UInputMenu class="my-2" v-model="clr_selected" placeholder="Farbe" :items="color"/>
-        <UInputMenu class="my-2" v-model="mtrl_selected" placeholder="Material" :items="material"/>
+        <UInputMenu required class="my-2" v-model="clr_selected" placeholder="Farbe" :items="color"/>
+        <UInputMenu required class="my-2" v-model="mtrl_selected" placeholder="Material" :items="material"/>
         <UInput
+          required
           class="my-2"
           placeholder="Bezeichnung"
           v-model="type"
         />
-        <UInputNumber v-model="amount" Label="Anzahl"/>
+        <UInputNumber required v-model="amount" Label="Anzahl"/>
         <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
-        <UInputMenu class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
+        <UInputMenu required class="my-2" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
         </UButton>
