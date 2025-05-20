@@ -104,8 +104,11 @@ async function deleteFilament(id: string) {
         description: 'Fehler beim Abrufen der Daten',
       })
     } else {
-      navigateTo('/')
-      // Update the data in the table
+      console.log('Data fetched successfully:', data)
+      errortoast.add({
+        title: 'Erfolg',
+        description: 'Filament erfolgreich gelöscht',
+      })
     }
   }
 }
