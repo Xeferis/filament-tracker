@@ -39,8 +39,13 @@ const columns: TableColumn<filament>[] = [
         false: 'error' as const
       }[row.getValue('refill') as string]
 
+      const b2t = {
+        true: 'ja' as const,
+        false: 'nein' as const
+      }[row.getValue('refill') as string]
+
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-        [row.getValue('refill') as string]
+        b2t
       )
     }
   },
