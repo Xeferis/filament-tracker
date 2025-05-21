@@ -121,6 +121,11 @@ async function updateFilament(id: string) {
   }
 }
 
+function switchModal() {
+  open_modal.value = !open_modal.value
+  open_modal_del.value = !open_modal_del.value
+}
+
 async function deleteFilament(id: string) {
   const { error } = await supabase.from('filaments').delete().eq('id', id)
   if (error) {
@@ -188,7 +193,7 @@ onUnmounted(() => {
     </template>
     <template #footer>
       <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" size="xl" color="error" variant="soft">Delete</UButton>
-      <UButton @click="open_modal_del = false" color="neutral" size="xl" variant="soft">Cancel</UButton>
+      <UButton @click="switchModal()" color="neutral" size="xl" variant="soft">Cancel</UButton>
     </template>
   </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
@@ -245,7 +250,7 @@ onUnmounted(() => {
           <p>{{ modal_manufacturer }}</p>
         </div>
         <div class="flex justify-between items-center mt-4">
-          <UButton @click="open_modal_del = true" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
+          <UButton @click="switchModal()" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
           <UButton @click="updateFilament(modal_id)" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
         </div>
       </div>
