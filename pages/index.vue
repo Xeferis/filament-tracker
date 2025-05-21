@@ -205,7 +205,7 @@ onUnmounted(() => {
           <p>Anzahl:</p>
           <div class="flex justify-center items-center">
             <UButton
-              :disabled="modal_amount > 0"
+              :disabled="modal_amount <= 1"
               class="mr-2"
               @click="modal_amount--"
               icon="i-lucide-minus"
@@ -214,7 +214,7 @@ onUnmounted(() => {
             ></UButton>
             <p class="font-bold w-8 text-center">{{ modal_amount }}</p>
             <UButton
-              :disabled="modal_amount < 100"
+              :disabled="modal_amount >= 100"
               class="ml-2"
               @click="modal_amount++"
               icon="i-lucide-plus"
