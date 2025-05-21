@@ -179,7 +179,7 @@ onUnmounted(() => {
 
 </script>
 <template>
-  <UModal :dismissible="false" v-model:open="open_modal_del" title="Filament Details">
+  <UModal :dismissible="false" v-model:open="open_modal_del" title="ACHTUNG!">
     <template #body>
       <div class="flex flex-col justify-center items-center">
         <p class="text-lg">Are you sure you want to delete this filament?</p>
@@ -187,8 +187,8 @@ onUnmounted(() => {
       </div>
     </template>
     <template #footer>
-      <UButton @click="deleteFilament(modal_id)" color="success" variant="soft">Delete</UButton>
-      <UButton @click="open_modal_del = false" color="error" variant="soft">Cancel</UButton>
+      <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" size="xl" color="error" variant="soft">Delete</UButton>
+      <UButton @click="open_modal_del = false" color="neutral" size="xl" variant="soft">Cancel</UButton>
     </template>
   </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
