@@ -245,7 +245,7 @@ onUnmounted(() => {
           <p>{{ modal_manufacturer }}</p>
         </div>
         <div class="flex justify-between items-center mt-4">
-          <UButton @click="open_modal_del = false" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
+          <UButton @click="open_modal_del = true" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
           <UButton @click="updateFilament(modal_id)" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
         </div>
       </div>
