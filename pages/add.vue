@@ -142,22 +142,23 @@ const addFilament = async () => {
         </h3>
 
         <div class="my-2">
-          <UInputMenu class="w-full" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+          <UInputMenu size="xl" class="w-full" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
         
         <div class="my-2">
-        <UInputMenu class="w-full"  v-model="clr_selected" placeholder="Farbe" :items="color"/>
+        <UInputMenu size="xl" class="w-full"  v-model="clr_selected" placeholder="Farbe" :items="color"/>
         <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
         <div class="my-2">
-          <UInputMenu class="w-full"  v-model="mtrl_selected" placeholder="Material" :items="material"/>
+          <UInputMenu class="w-full" size="xl"  v-model="mtrl_selected" placeholder="Material" :items="material"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
         <div class="my-2">
           <UInput
+            size="xl"
             class="w-full" 
             placeholder="Bezeichnung"
             v-model="type"
@@ -166,7 +167,7 @@ const addFilament = async () => {
         </div>
 
         <div class="my-2 ">
-          <UInputNumber class="w-full" v-model="amount" :min="1" :max="100" Label="Anzahl"/>
+          <UInputNumber class="w-full" size="xl" v-model="amount" :min="1" :max="100" Label="Anzahl"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
@@ -176,7 +177,7 @@ const addFilament = async () => {
         </div>
         
         <div class="my-2">
-          <UInputMenu class="w-full"  :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
+          <UInputMenu class="w-full" size="xl" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">

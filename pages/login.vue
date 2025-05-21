@@ -27,12 +27,14 @@ const signIn = async () => {
         Please enter your credentials:
       </h3>
       <UInput
+        size="xl"
         class="my-2"
         placeholder="e-mail"
         v-model="email"
         type="email"
       />
       <UInput
+        size="xl"
         class="my-2"
         placeholder="password"
         v-model="password"
