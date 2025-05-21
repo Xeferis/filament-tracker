@@ -6,6 +6,7 @@ let realtimeChannel: RealtimeChannel
 const UBadge = resolveComponent('UBadge')
 const supabase = useSupabaseClient()
 const open_modal = ref(false)
+const open_modal_del = ref(false)
 
 const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filaments', async () => {
   const { data } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
@@ -178,6 +179,18 @@ onUnmounted(() => {
 
 </script>
 <template>
+  <UModal :dismissible="false" v-model:open="open_modal_del" title="Filament Details">
+    <template #body>
+      <div class="flex flex-col justify-center items-center">
+        <p class="text-lg">Are you sure you want to delete this filament?</p>
+        <p class="text-lg">This action cannot be undone.</p>
+      </div>
+    </template>
+    <template #footer>
+      <UButton @click="deleteFilament(modal_id)" color="success" variant="soft">Delete</UButton>
+      <UButton @click="open_modal_del = false" color="error" variant="soft">Cancel</UButton>
+    </template>
+  </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
       <div>
@@ -232,7 +245,7 @@ onUnmounted(() => {
           <p>{{ modal_manufacturer }}</p>
         </div>
         <div class="flex justify-between items-center mt-4">
-          <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
+          <UButton @click="open_modal_del = false" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
           <UButton @click="updateFilament(modal_id)" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
         </div>
       </div>
