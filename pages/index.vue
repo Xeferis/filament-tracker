@@ -116,6 +116,7 @@ async function updateFilament(id: string) {
     })
     // Refresh the data after update
     refreshNuxtData('filaments')
+    open_modal.value = false
   }
 }
 
