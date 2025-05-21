@@ -144,6 +144,7 @@ async function deleteFilament(id: string) {
     // Refresh the data after deletion
     refreshNuxtData('filaments')
     open_modal.value = false
+    open_modal_del.value = false
   }
 }
 
