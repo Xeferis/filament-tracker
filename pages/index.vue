@@ -238,14 +238,14 @@ onUnmounted(() => {
       </div>
     </template>
   </UModal>
-  <div class="flex flex-col justify-center items-center p-1 md:p-10 w-full">
+  <div class="flex flex-col justify-center items-center px-4 py-1 md:px-10 md:py-10 w-full">
     <h1 class="text-4xl md:text-6xl text-center mb-8 md:mb-14">Current Filament Supply</h1>
     <div class="flex flex-col md:w-4/5 w-full">
       <div class="flex justify-end items-center mb-2">
-        <UButton to="/add">Add</UButton>
+        <UButton size="xl" to="/add">Add</UButton>
       </div>
       <div class="flex px-4 py-3.5 border-b border-accented">
-        <UInput v-model="globalFilter" class="max-w-full md:max-w-lg" size="xl" placeholder="Filter..." />
+        <UInput v-model="globalFilter" class="w-full md:w-lg" size="xl" placeholder="Filter..." />
       </div>
       <UTable ref="table" v-model:global-filter="globalFilter" :data="filaments" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
     </div>
