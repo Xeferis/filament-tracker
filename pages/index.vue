@@ -93,6 +93,32 @@ const columns: TableColumn<filament>[] = [
 ]
 const errortoast = useToast()
 
+async function updateFilament(id: string) {
+  const { error } = await supabase
+    .from('filaments')
+    .update({
+      amount: modal_amount.value,
+    })
+    .eq('id', id)
+
+  if (error) {
+    console.error('Error updating filament:', error)
+    errortoast.add({
+      title: 'Fehler',
+      description: 'Fehler beim Aktualisieren des Filaments',
+      color: 'error',
+    })
+  } else {
+    errortoast.add({
+      title: 'Erfolg',
+      description: 'Filament erfolgreich aktualisiert',
+      color: 'success',
+    })
+    // Refresh the data after update
+    refreshNuxtData('filaments')
+  }
+}
+
 async function deleteFilament(id: string) {
   const { error } = await supabase.from('filaments').delete().eq('id', id)
   if (error) {
@@ -206,6 +232,7 @@ onUnmounted(() => {
         </div>
         <div class="flex justify-between items-center mt-4">
           <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
+          <UButton @click="updateFilament(modal_id)" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
         </div>
       </div>
     </template>
