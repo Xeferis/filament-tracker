@@ -166,11 +166,14 @@ const addFilament = async () => {
         </div>
 
         <div class="my-2 ">
-          <UInputNumber class="w-full" v-model="amount" Label="Anzahl"/>
+          <UInputNumber class="w-full" v-model="amount" :min="1" :max="100" Label="Anzahl"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
-        <UCheckbox class="my-2" v-model="refill" name="refill" label="Refill" size="xl" />
+        <div class="my-2 flex justify-between items-center">
+          <p>Nachfüllpackung: </p>
+          <USwitch v-model="refill" size="xl"/>
+        </div>
         
         <div class="my-2">
           <UInputMenu class="w-full"  :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
