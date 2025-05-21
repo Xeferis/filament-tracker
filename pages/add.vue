@@ -3,7 +3,7 @@
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
-const amount = ref(0)
+const amount = ref(1)
 const refill = ref(false)
 const manufacturer = ref([
   'BambuLab',
@@ -130,9 +130,9 @@ const addFilament = async () => {
 </script>
 <template>
   <div class="flex flex-col justify-center items-center p-10 w-full">
-    <h3 class="text-4xl text-center mb-14">Add new Filament</h3>
-    <div class="flex flex-col justify-center items-center w-4/5 md:w-full">
-      <div class="flex justify-start items-center mb-4 w-1/3">
+    <h3 class="text-3xl md:text-4xl text-center mb-14">Add new Filament</h3>
+    <div class="flex flex-col justify-center items-center md:w-4/5 w-full">
+      <div class="flex justify-start items-center mb-4 md:w-1/3 w-full">
         <UButton to="/">Back</UButton>
       </div>
       <div class="flex flex-col h-fit w-80 p-4 bg-neutral-800 shadow-2xl shadow-neutral-200 rounded-xl">

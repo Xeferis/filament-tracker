@@ -239,7 +239,7 @@ onUnmounted(() => {
     </template>
   </UModal>
   <div class="flex flex-col justify-center items-center p-10 w-full">
-    <h1 class="text-6xl text-center mb-14">Current Filament Supply</h1>
+    <h1 class="text-4xl md:text-6xl text-center mb-14">Current Filament Supply</h1>
     <div class="flex flex-col md:w-4/5 w-full">
       <div class="flex justify-end items-center mb-2">
         <UButton to="/add">Add</UButton>
