@@ -187,9 +187,9 @@ onUnmounted(() => {
 <template>
   <UModal :dismissible="false" v-model:open="open_modal_del" title="ACHTUNG!">
     <template #body>
-      <div class="flex flex-col justify-center items-center">
-        <p class="text-lg">Are you sure you want to delete this filament?</p>
-        <p class="text-lg">This action cannot be undone.</p>
+      <div class="flex flex-col justify-center items-center text-center pb">
+        <p class="text-lg">Sind Sie sicher das Sie das Filament löschen möchten?</p>
+        <p class="text-lg text-error">Diese Aktion kann nicht rückgängig gemacht werden!</p>
       </div>
     </template>
     <template #footer>
