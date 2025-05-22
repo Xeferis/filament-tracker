@@ -259,7 +259,8 @@ onUnmounted(() => {
       <div class="flex w-full my-2 mb-2 justify-center items-center">
         <NuxtPicture
           format="avif,webp"
-          src="https://placehold.co/400x400"
+          :src="`${modal_item_number}.png`"
+          :alt="modal_item_number"
           :imgAttrs="{
             class: 'rounded-lg',
           }"
