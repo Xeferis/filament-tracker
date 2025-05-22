@@ -13,7 +13,7 @@ const { data: filaments_selected} = await useAsyncData('filaments_selected', asy
   return data
 })
 
-console.log(filaments_selected.value.type) //#DEBUG
+console.log(filaments_selected.value[0]) //#DEBUG
 
 const dd_loading = ref(false)
 const type = ref(filaments_selected.value.type)
