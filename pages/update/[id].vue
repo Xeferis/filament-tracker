@@ -13,6 +13,8 @@ const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filam
   return data
 })
 
+console.log(filaments.value) //#DEBUG
+
 const dd_loading = ref(false)
 const type = ref(filaments.value?.type)
 const item_number = ref(filaments.value?.item_number)
@@ -92,9 +94,6 @@ const updateFilament = async () => {
             description: 'Filament erfolgreich aktualisiert',
             color: 'success',
             })
-            // Refresh the data after update
-            refreshNuxtData('filaments')
-            open_modal.value = false
         }
     }
 }
