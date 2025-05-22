@@ -22,8 +22,10 @@ const LogOut = async () => {
         <p>logged in as:</p>
         <p class="text-primary">{{ user?.email }}</p>
       </div>
-      <ChangeColor />
-      <UButton @click="LogOut">LogOut</UButton>
+      <div class="flex gap-2 md:gap-4">
+        <ChangeColor />
+        <UButton @click="LogOut">LogOut</UButton>
+      </div>
     </div>
     <slot />
   </div>
