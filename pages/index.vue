@@ -256,11 +256,14 @@ onUnmounted(() => {
   </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
-      <div class="flex w-full my-2 mb-2 justify-center items-center">
+      <div class="flex w-full my-2 mb-2 max-h-[400px] justify-center items-center">
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
+          width="400"
+          height="400"
+          fit="contain"
           :alt="modal_item_number"
-          class="rounded-lg max-w-[400px]"
+          class="rounded-lg"
           :custom="true"
           v-slot="{ src, isLoaded, imgAttrs }"
         >
