@@ -275,7 +275,6 @@ onUnmounted(() => {
           <!-- Show a placeholder while loading -->
           <img
             v-else
-            v-bind="imgAttrs"
             class="md:w-[400px] w-[200px] rounded-lg"
             src="../public/placeholder.jpg"
             alt="placeholder"
