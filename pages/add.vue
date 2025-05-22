@@ -99,17 +99,17 @@ const addFilament = async () => {
         </h3>
 
         <div class="my-2">
-          <UInputMenu size="xl" class="w-full" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
+          <USelectMenu size="xl" class="w-full" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
           <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
         
         <div class="my-2">
-        <UInputMenu size="xl" class="w-full"  v-model="clr_selected" placeholder="Farbe" :items="color"/>
+        <USelectMenu size="xl" class="w-full"  v-model="clr_selected" placeholder="Farbe" :items="color"/>
         <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
         <div class="my-2">
-          <UInputMenu class="w-full" size="xl"  v-model="mtrl_selected" placeholder="Material" :items="material"/>
+          <USelectMenu class="w-full" size="xl"  v-model="mtrl_selected" placeholder="Material" :items="material"/>
           <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
@@ -143,7 +143,7 @@ const addFilament = async () => {
         </div>
         
         <div class="my-2">
-          <UInputMenu class="w-full" size="xl" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
+          <USelectMenu class="w-full" size="xl" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
           <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
