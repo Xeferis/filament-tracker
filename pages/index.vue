@@ -284,23 +284,10 @@ onUnmounted(() => {
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
       <div class="flex w-full py-4 justify-center items-center">
-        <NuxtImage
-          src="/nuxt-icon.png"
-          v-slot="{ src, isLoaded, imgAttrs }"
-          >
-            <!-- Show the actual image when loaded -->
-            <img
-              v-if="isLoaded"
-              v-bind="imgAttrs"
-              :src="src"
-            >
-            <!-- Show a placeholder while loading -->
-            <img
-              v-else
-              src="https://placehold.co/400x400"
-              alt="placeholder"
-            >
-        </NuxtImage>
+        <NuxtPicture
+          format="avif,webp"
+          src="https://placehold.co/400x400"
+        />
       </div>
       <div>
         <div class="flex justify-between items-center mb-2">
