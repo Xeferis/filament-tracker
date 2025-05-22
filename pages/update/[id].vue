@@ -105,6 +105,7 @@ const updateFilament = async () => {
             description: 'Filament erfolgreich aktualisiert',
             color: 'success',
             })
+            navigateTo('/')
         }
     }
 }
