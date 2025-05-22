@@ -282,39 +282,39 @@ onUnmounted(() => {
       <div>
         <div class="flex justify-between items-center mb-2">
           <p>ID:</p>
-          <p>{{ modal_id }}</p>
+          <p class="text-primary">{{ modal_id }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Artikelnummer:</p>
-          <p>{{ modal_item_number }}</p>
+          <p class="text-primary">{{ modal_item_number }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Ort der Lagerung:</p>
-          <p>{{ modal_location }}</p>
+          <p class="text-primary">{{ modal_location }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Bezeichnung:</p>
-          <p>{{ modal_type }}</p>
+          <p class="text-primary">{{ modal_type }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Farbe:</p>
-          <p>{{ modal_color }}</p>
+          <p class="text-primary">{{ modal_color }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Material:</p>
-          <p>{{ modal_material }}</p>
+          <p class="text-primary">{{ modal_material }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Status:</p>
-            <p>{{ modal_status }}</p>
+          <p class="text-primary">{{ modal_status }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Refill Roll:</p>
-          <p>{{ modal_refill }}</p>
+          <p class="text-primary">{{ modal_refill }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Hersteller:</p>
-          <p>{{ modal_manufacturer }}</p>
+          <p class="text-primary">{{ modal_manufacturer }}</p>
         </div>
         <div class="flex justify-between items-center mt-4">
           <UButton @click="switchModal()" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
