@@ -9,25 +9,25 @@ import statusList from '~/composables/statusList'
 const supabase = useSupabaseClient()
 
 const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filaments', async () => {
-  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(description)").eq('id', id)
+  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(description)").eq('id', id).limit(1)
   return data
 })
 
 console.log(filaments.value) //#DEBUG
 
 const dd_loading = ref(false)
-const type = ref(filaments.value?.type)
-const item_number = ref(filaments.value?.item_number)
-const refill = ref(filaments.value?.refill)
+const type = ref(filaments.value.type)
+const item_number = ref(filaments.value.item_number)
+const refill = ref(filaments.value.refill)
 const manufacturer = ref(manufacturerList())
-const manu_selected = ref(filaments.value?.manufacturer)
+const manu_selected = ref(filaments.value.manufacturer)
 const color = ref(colorList())
-const clr_selected = ref(filaments.value?.color)
+const clr_selected = ref(filaments.value.color)
 const material = ref(materialsList())
-const mtrl_selected = ref(filaments.value?.material)
-const dd_selected = ref(filaments.value?.location_id)
+const mtrl_selected = ref(filaments.value.material)
+const dd_selected = ref(filaments.value.location_id)
 const dd_value = ref([])
-const dd_status_sel = ref<RadioGroupValue>(filaments.value?.status)
+const dd_status_sel = ref<RadioGroupValue>(filaments.value.status)
 
 
 const dd_status = ref<RadioGroupItem[]>(statusList())
