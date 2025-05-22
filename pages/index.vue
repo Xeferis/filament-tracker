@@ -260,6 +260,7 @@ onUnmounted(() => {
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
           sizes="200px md:400px"
+          :placeholder="[50, 25, 75, 5]"
           :alt="modal_item_number"
           class="rounded-lg"
           :custom="true"
@@ -276,7 +277,7 @@ onUnmounted(() => {
           <img
             v-else
             sizes="200px md:400px"
-            src="https://placehold.co/400x400"
+            src="placeholder.jpg"
             alt="placeholder"
           >
         </NuxtImg>
