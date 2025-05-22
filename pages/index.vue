@@ -283,10 +283,13 @@ onUnmounted(() => {
   </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
-      <div class="flex w-full my-2 rounded-lg justify-center items-center">
+      <div class="flex w-full my-2 justify-center items-center">
         <NuxtPicture
           format="avif,webp"
           src="https://placehold.co/400x400"
+          :imgAttrs="{
+            class: 'rounded-lg',
+          }"
         />
       </div>
       <div>
