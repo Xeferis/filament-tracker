@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RadioGroupItem } from '@nuxt/ui'
+import type { RadioGroupItem, RadioGroupValue } from '@nuxt/ui'
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
@@ -68,7 +68,7 @@ const material = ref([
 const mtrl_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
-const dd_status_sel = ref(1)
+const dd_status_sel = ref<RadioGroupValue>(1)
 
 
 const dd_status = ref<RadioGroupItem[]>([
