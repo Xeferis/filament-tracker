@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { Column } from '@tanstack/vue-table'
 import type { RealtimeChannel } from '@supabase/supabase-js'
 import { h, resolveComponent } from 'vue'
 let realtimeChannel: RealtimeChannel
 const UBadge = resolveComponent('UBadge')
+const UButton = resolveComponent('UButton')
+const UDropdownMenu = resolveComponent('UDropdownMenu')
+
 const supabase = useSupabaseClient()
 const open_modal = ref(false)
 const open_modal_del = ref(false)
@@ -41,27 +45,27 @@ type filament = {
 const columns: TableColumn<filament>[] = [
   {
     accessorKey: 'item_number',
-    header: 'Artikelnummber',
+    header: ({ column }) => getHeader(column, 'Artikelnummber'),
   },
   {
     accessorKey: 'locations.description',
-    header: 'Ort der Lagerung',
+    header: ({ column }) => getHeader(column, 'Ort der Lagerung'),
   },
   {
     accessorKey: 'type',
-    header: 'Bezeichnung',
+    header: ({ column }) => getHeader(column, 'Bezeichnung'),
   },
   {
     accessorKey: 'color',
-    header: 'Farbe',
+    header: ({ column }) => getHeader(column, 'Farbe'),
   },
   {
     accessorKey: 'material',
-    header: 'Material',
+    header: ({ column }) => getHeader(column, 'Material'),
   },
   {
     accessorKey: 'status',
-    header: 'Status',
+    header: ({ column }) => getHeader(column, 'Status'),
     cell: ({ row }) => {
       const color = {
         1: 'neutral' as const,
@@ -83,7 +87,7 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'refill',
-    header: 'Refill Roll',
+    header: ({ column }) => getHeader(column, 'Refill Roll'),
     cell: ({ row }) => {
       const color = {
         true: 'success' as const,
@@ -102,12 +106,74 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'manufacturer',
-    header: () => h('div', { class: 'text-right' }, 'Hersteller'),
+    header: (column) => h('div', { class: 'text-right' }, getHeader(column, 'Hersteller')),
     cell: ({ row }) => {
       return h('div', { class: 'text-right' }, row.getValue('manufacturer'))
     }
   },
 ]
+function getHeader(column: Column<filament>, label: string) {
+  const isSorted = column.getIsSorted()
+
+  return h(
+    UDropdownMenu,
+    {
+      content: {
+        align: 'start'
+      },
+      'aria-label': 'Actions dropdown',
+      items: [
+        {
+          label: 'Asc',
+          type: 'checkbox',
+          icon: 'i-lucide-arrow-up-narrow-wide',
+          checked: isSorted === 'asc',
+          onSelect: () => {
+            if (isSorted === 'asc') {
+              column.clearSorting()
+            } else {
+              column.toggleSorting(false)
+            }
+          }
+        },
+        {
+          label: 'Desc',
+          icon: 'i-lucide-arrow-down-wide-narrow',
+          type: 'checkbox',
+          checked: isSorted === 'desc',
+          onSelect: () => {
+            if (isSorted === 'desc') {
+              column.clearSorting()
+            } else {
+              column.toggleSorting(true)
+            }
+          }
+        }
+      ]
+    },
+    () =>
+      h(UButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        label,
+        icon: isSorted
+          ? isSorted === 'asc'
+            ? 'i-lucide-arrow-up-narrow-wide'
+            : 'i-lucide-arrow-down-wide-narrow'
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5 data-[state=open]:bg-elevated',
+        'aria-label': `Sort by ${isSorted === 'asc' ? 'descending' : 'ascending'}`
+      })
+  )
+}
+
+const sorting = ref([
+  {
+    id: 'item_number',
+    desc: false
+  }
+])
+
 const errortoast = useToast()
 
 async function updateStatusFilament(id: string) {
@@ -270,7 +336,7 @@ onUnmounted(() => {
       <div class="flex px-4 py-3.5 border-b border-accented">
         <UInput v-model="globalFilter" class="w-full md:w-lg" size="xl" placeholder="Filter..." />
       </div>
-      <UTable ref="table" v-model:global-filter="globalFilter" :data="filaments" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
+      <UTable ref="table" v-model:sorting="sorting" v-model:global-filter="globalFilter" :data="filaments" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
     </div>
   </div>
 </template>
