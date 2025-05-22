@@ -259,7 +259,7 @@ onUnmounted(() => {
       <div class="flex w-full my-2 mb-2 justify-center items-center">
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
-          sizes="250px md:400px"
+          sizes="200px md:400px"
           :alt="modal_item_number"
           class="rounded-lg"
           :custom="true"
@@ -275,6 +275,7 @@ onUnmounted(() => {
           <!-- Show a placeholder while loading -->
           <img
             v-else
+            sizes="250px md:400px"
             src="https://placehold.co/400x400"
             alt="placeholder"
           >
