@@ -61,19 +61,19 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'status',
-    header: () => h('div', { class: 'text-center' }, 'Status'),
+    header: 'Status',
     cell: ({ row }) => {
       const color = {
         1: 'neutral' as const,
         2: 'amber' as const,
         3: 'secondary' as const
-      }[row.getValue('refill') as string]
+      }[row.getValue('status') as string]
       
       const text = {
         1: 'Bestellung geplant' as const,
         2: 'Bestellt' as const,
         3: 'Eingelagert' as const
-      }[row.getValue('refill') as string]
+      }[row.getValue('status') as string]
 
 
       return h(UBadge, { variant: 'subtle', color }, () =>
