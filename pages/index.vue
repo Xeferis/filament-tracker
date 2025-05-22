@@ -173,7 +173,7 @@ function onSelect(row: TableRow<filament>, e?: Event) {
   open_modal.value = !open_modal.value
   modal_id.value = row.original.id
   modal_item_number.value = row.original.item_number
-  modal_location.value = row.original.location
+  modal_location.value = row.getValue('locations.description')
   modal_type.value = row.original.type
   modal_color.value = row.original.color
   modal_material.value = row.original.material
@@ -222,7 +222,7 @@ onUnmounted(() => {
           <p>{{ modal_id }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
-          <p>ID:</p>
+          <p>Artikelnummer:</p>
           <p>{{ modal_item_number }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">

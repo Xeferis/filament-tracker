@@ -196,7 +196,7 @@ const addFilament = async () => {
         </div>
 
         <div class="my-2 ">
-          <URadioGroup class="w-full" variant="card" v-model="dd_status_sel" default-value="1" :items="dd_status"/>
+          <URadioGroup class="w-full" variant="card" v-model="dd_status_sel" default-value=1 :items="dd_status"/>
           <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
