@@ -106,7 +106,7 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'manufacturer',
-    header: (column) => h('div', { class: 'text-right' }, getHeader(column, 'Hersteller')),
+    header: ({column}) => h('div', { class: 'text-right' }, getHeader(column, 'Hersteller')),
     cell: ({ row }) => {
       return h('div', { class: 'text-right' }, row.getValue('manufacturer'))
     }
