@@ -65,7 +65,7 @@ const columns: TableColumn<filament>[] = [
     cell: ({ row }) => {
       const color = {
         1: 'neutral' as const,
-        2: 'amber' as const,
+        2: 'warning' as const,
         3: 'secondary' as const
       }[row.getValue('status') as string]
       

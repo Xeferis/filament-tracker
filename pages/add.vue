@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import type { RadioGroupItem } from '@nuxt/ui'
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
@@ -71,7 +71,7 @@ const dd_value = ref([])
 const dd_status_sel = ref([])
 
 
-const dd_status = ref([
+const dd_status = ref<RadioGroupItem[]>([
   {
     label: 'Bestellung geplant',
     value: 1,
@@ -196,7 +196,7 @@ const addFilament = async () => {
         </div>
 
         <div class="my-2 ">
-          <URadioGroup class="w-full" size="xl" variant="card" v-model="dd_status_sel" default-value="1" :items="dd_status"/>
+          <URadioGroup class="w-full" variant="card" v-model="dd_status_sel" default-value="1" :items="dd_status"/>
           <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
