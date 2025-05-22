@@ -3,7 +3,7 @@
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
-const status = ref(1)
+const status = ref()
 const item_number = ref()
 const refill = ref(false)
 const manufacturer = ref([
@@ -68,10 +68,7 @@ const material = ref([
 const mtrl_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
-const dd_status_sel = ref({
-  label: 'Bestellung geplant',
-  value: 1,
-})
+const dd_status_sel = ref([])
 
 
 const dd_status = ref([
