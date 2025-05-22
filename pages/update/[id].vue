@@ -88,7 +88,7 @@ const updateFilament = async () => {
                 material: mtrl_selected.value,
                 refill: refill.value,
                 manufacturer: manu_selected.value,
-                location: dd_selected.value.value,
+                location_id: dd_selected.value.value
             })
             .eq('id', id)
 
