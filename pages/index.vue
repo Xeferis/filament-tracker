@@ -260,6 +260,8 @@ onUnmounted(() => {
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
           :alt="modal_item_number"
+          :width="400"
+          :height="400"
           class="rounded-lg"
           :custom="true"
           v-slot="{ src, isLoaded, imgAttrs }"
