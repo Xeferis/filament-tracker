@@ -45,7 +45,9 @@ const color = ref([
 const clr_selected = ref()
 const material = ref([
   'PLA',
+  'PLA-CF',
   'PETG',
+  'PETG-CF',
   'ABS',
   'Flexibel TPU/TPE',
   'Nylon (PA)',
