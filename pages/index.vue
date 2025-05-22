@@ -1,73 +1,93 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import type { Column } from '@tanstack/vue-table'
 import type { RealtimeChannel } from '@supabase/supabase-js'
 import { h, resolveComponent } from 'vue'
 let realtimeChannel: RealtimeChannel
 const UBadge = resolveComponent('UBadge')
+const UButton = resolveComponent('UButton')
+const UDropdownMenu = resolveComponent('UDropdownMenu')
+
 const supabase = useSupabaseClient()
 const open_modal = ref(false)
 const open_modal_del = ref(false)
 
 const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filaments', async () => {
-  const { data } = await supabase.from('filaments').select("id, type, amount, refill, manufacturer, color, material, locations(description)")
+  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(description)")
   return data
 })
 
 // console.log(data) //#DEBUG
 
 const modal_id = ref()
+const modal_item_number = ref()
 const modal_location = ref()
 const modal_type = ref()
 const modal_color = ref()
 const modal_material = ref()
-const modal_amount = ref()
+const modal_status = ref()
 const modal_refill = ref()
 const modal_manufacturer = ref()
 
 
 type filament = {
-  id: String
+  id: Number
+  item_number: String
   location: String
   type: String
   color: String
   material: String
-  amount: Number
+  status: Number
   refill: Boolean
   manufacturer: String
 }
 
 const columns: TableColumn<filament>[] = [
   {
-    accessorKey: 'id',
-    header: '#ID',
-    cell: ({ row }) => `#${row.getValue('id')}`
+    accessorKey: 'item_number',
+    header: ({ column }) => getHeader(column, 'Artikelnummber'),
   },
   {
     accessorKey: 'locations.description',
-    header: 'Ort der Lagerung',
+    header: ({ column }) => getHeader(column, 'Ort der Lagerung'),
   },
   {
     accessorKey: 'type',
-    header: 'Bezeichnung',
+    header: ({ column }) => getHeader(column, 'Bezeichnung'),
   },
   {
     accessorKey: 'color',
-    header: 'Farbe',
+    header: ({ column }) => getHeader(column, 'Farbe'),
   },
   {
     accessorKey: 'material',
-    header: 'Material',
+    header: ({ column }) => getHeader(column, 'Material'),
   },
   {
-    accessorKey: 'amount',
-    header: () => h('div', { class: 'text-center' }, 'Anzahl'),
+    accessorKey: 'status',
+    header: ({ column }) => getHeader(column, 'Status'),
     cell: ({ row }) => {
-      return h('div', { class: 'text-center font-bold' }, row.getValue('amount'))
+      const color = {
+        1: 'neutral' as const,
+        2: 'warning' as const,
+        3: 'secondary' as const
+      }[row.getValue('status') as string]
+      
+      const text = {
+        1: 'Bestellung geplant' as const,
+        2: 'Bestellt' as const,
+        3: 'Eingelagert' as const
+      }[row.getValue('status') as string]
+
+
+      return h(UBadge, { variant: 'subtle', color }, () =>
+        text
+      )
     }
   },
   {
     accessorKey: 'refill',
-    header: 'Refill Roll',
+    header: ({ column }) => getHeader(column, 'Refill Roll'),
     cell: ({ row }) => {
       const color = {
         true: 'success' as const,
@@ -86,19 +106,81 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'manufacturer',
-    header: () => h('div', { class: 'text-right' }, 'Hersteller'),
+    header: ({column}) => h('div', { class: 'text-right' }, getHeader(column, 'Hersteller')),
     cell: ({ row }) => {
       return h('div', { class: 'text-right' }, row.getValue('manufacturer'))
     }
   },
 ]
+function getHeader(column: Column<filament>, label: string) {
+  const isSorted = column.getIsSorted()
+
+  return h(
+    UDropdownMenu,
+    {
+      content: {
+        align: 'start'
+      },
+      'aria-label': 'Actions dropdown',
+      items: [
+        {
+          label: 'Asc',
+          type: 'checkbox',
+          icon: 'i-lucide-arrow-up-narrow-wide',
+          checked: isSorted === 'asc',
+          onSelect: () => {
+            if (isSorted === 'asc') {
+              column.clearSorting()
+            } else {
+              column.toggleSorting(false)
+            }
+          }
+        },
+        {
+          label: 'Desc',
+          icon: 'i-lucide-arrow-down-wide-narrow',
+          type: 'checkbox',
+          checked: isSorted === 'desc',
+          onSelect: () => {
+            if (isSorted === 'desc') {
+              column.clearSorting()
+            } else {
+              column.toggleSorting(true)
+            }
+          }
+        }
+      ]
+    },
+    () =>
+      h(UButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        label,
+        icon: isSorted
+          ? isSorted === 'asc'
+            ? 'i-lucide-arrow-up-narrow-wide'
+            : 'i-lucide-arrow-down-wide-narrow'
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5 data-[state=open]:bg-elevated',
+        'aria-label': `Sort by ${isSorted === 'asc' ? 'descending' : 'ascending'}`
+      })
+  )
+}
+
+const sorting = ref([
+  {
+    id: 'item_number',
+    desc: false
+  }
+])
+
 const errortoast = useToast()
 
-async function updateFilament(id: string) {
+async function updateStatusFilament(id: string) {
   const { error } = await supabase
     .from('filaments')
     .update({
-      amount: modal_amount.value,
+      status: modal_status.value,
     })
     .eq('id', id)
 
@@ -156,15 +238,17 @@ function onSelect(row: TableRow<filament>, e?: Event) {
   /* If you decide to also select the column you can do this  */
   open_modal.value = !open_modal.value
   modal_id.value = row.original.id
-  modal_location.value = row.original.location
+  modal_item_number.value = row.original.item_number
+  modal_location.value = row.original.locations.description
   modal_type.value = row.original.type
   modal_color.value = row.original.color
   modal_material.value = row.original.material
-  modal_amount.value = row.original.amount
+  modal_status.value = row.original.status
   modal_refill.value = row.original.refill
   modal_manufacturer.value = row.original.manufacturer
-  console.log(row.original.id)
-  console.log(e)
+  //console.log(row.original.locations.description)
+  //console.log(row)
+  //console.log(e)
 }
 
 onMounted(() => {
@@ -199,10 +283,23 @@ onUnmounted(() => {
   </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
+      <div class="flex w-full my-2 mb-2 justify-center items-center">
+        <NuxtPicture
+          format="avif,webp"
+          src="https://placehold.co/400x400"
+          :imgAttrs="{
+            class: 'rounded-lg',
+          }"
+        />
+      </div>
       <div>
         <div class="flex justify-between items-center mb-2">
           <p>ID:</p>
           <p>{{ modal_id }}</p>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <p>Artikelnummer:</p>
+          <p>{{ modal_item_number }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Ort der Lagerung:</p>
@@ -221,26 +318,8 @@ onUnmounted(() => {
           <p>{{ modal_material }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
-          <p>Anzahl:</p>
-          <div class="flex justify-center items-center">
-            <UButton
-              :disabled="modal_amount <= 1"
-              class="mr-2"
-              @click="modal_amount--"
-              icon="i-lucide-minus"
-              color="success"
-              variant="soft"
-            ></UButton>
-            <p class="font-bold w-8 text-center">{{ modal_amount }}</p>
-            <UButton
-              :disabled="modal_amount >= 100"
-              class="ml-2"
-              @click="modal_amount++"
-              icon="i-lucide-plus"
-              color="success"
-              variant="soft"
-            ></UButton>
-          </div>
+          <p>Status:</p>
+            <p>{{ modal_status }}</p>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Refill Roll:</p>
@@ -252,7 +331,7 @@ onUnmounted(() => {
         </div>
         <div class="flex justify-between items-center mt-4">
           <UButton @click="switchModal()" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
-          <UButton @click="updateFilament(modal_id)" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
+          <UButton @click="updateStatusFilament(modal_id)" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
         </div>
       </div>
     </template>
@@ -266,7 +345,7 @@ onUnmounted(() => {
       <div class="flex px-4 py-3.5 border-b border-accented">
         <UInput v-model="globalFilter" class="w-full md:w-lg" size="xl" placeholder="Filter..." />
       </div>
-      <UTable ref="table" v-model:global-filter="globalFilter" :data="filaments" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
+      <UTable ref="table" v-model:sorting="sorting" v-model:global-filter="globalFilter" :data="filaments" :columns="columns" class="flex-1" v-model:row-selection="rowSelection" @select="onSelect" />
     </div>
   </div>
 </template>

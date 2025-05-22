@@ -1,9 +1,10 @@
 <script setup lang="ts">
-
+import type { RadioGroupItem, RadioGroupValue } from '@nuxt/ui'
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
-const amount = ref(1)
+const status = ref()
+const item_number = ref()
 const refill = ref(false)
 const manufacturer = ref([
   'BambuLab',
@@ -44,7 +45,9 @@ const color = ref([
 const clr_selected = ref()
 const material = ref([
   'PLA',
+  'PLA-CF',
   'PETG',
+  'PETG-CF',
   'ABS',
   'Flexibel TPU/TPE',
   'Nylon (PA)',
@@ -67,6 +70,23 @@ const material = ref([
 const mtrl_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
+const dd_status_sel = ref<RadioGroupValue>(1)
+
+
+const dd_status = ref<RadioGroupItem[]>([
+  {
+    label: 'Bestellung geplant',
+    value: 1,
+  },
+  {
+    label: 'Bestellt',
+    value: 2,
+  },
+  {
+    label: 'Eingelagert',
+    value: 3,
+  },
+])
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     dd_loading.value = true
@@ -88,10 +108,11 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 })
 
 interface Filament {
+  item_number: string
   type: string
   color: string
   material: string
-  amount: number
+  status: number
   refill: boolean
   manufacturer: string
   location_id: number
@@ -100,12 +121,13 @@ interface Filament {
 const errortoast = useToast()
 
 const addFilament = async () => {
-  if (type.value && amount.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
+  if (type.value && dd_status_sel.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
     const { data, error } = await supabase
     .from('filaments')
     .insert<Filament>({
       type: type.value,
-      amount: amount.value,
+      item_number: item_number.value,
+      status: dd_status_sel.value,
       color: clr_selected.value,
       material: mtrl_selected.value,
       refill: refill.value,
@@ -135,7 +157,7 @@ const addFilament = async () => {
       <div class="flex justify-start items-center mb-4 md:w-1/3 w-full">
         <UButton to="/">Back</UButton>
       </div>
-      <div class="flex flex-col h-fit w-80 p-4 bg-neutral-800 shadow-2xl shadow-neutral-200 rounded-xl">
+      <div class="flex flex-col h-fit w-80 p-4  bg-neutral-400 dark:bg-neutral-800 shadow-2xl dark:shadow-neutral-200 rounded-xl">
         <h2 class="text-2xl text-center mb-5">Add new Filament</h2>
         <h3 class="text-center mb-5">
           Please enter the filament details:
@@ -143,17 +165,26 @@ const addFilament = async () => {
 
         <div class="my-2">
           <UInputMenu size="xl" class="w-full" v-model="manu_selected" placeholder="Hersteller" :items="manufacturer"/>
-          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
+          <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
         
         <div class="my-2">
         <UInputMenu size="xl" class="w-full"  v-model="clr_selected" placeholder="Farbe" :items="color"/>
-        <p class="text-red-600 text-xs mt-0 pl-2">required</p>
+        <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
         <div class="my-2">
           <UInputMenu class="w-full" size="xl"  v-model="mtrl_selected" placeholder="Material" :items="material"/>
-          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
+          <p class="text-red-600 text-xs mt-1 pl-2">required</p>
+        </div>
+
+        <div class="my-2">
+          <UInput
+            size="xl"
+            class="w-full" 
+            placeholder="Artikelnummer"
+            v-model="item_number"
+          />
         </div>
 
         <div class="my-2">
@@ -163,12 +194,12 @@ const addFilament = async () => {
             placeholder="Bezeichnung"
             v-model="type"
           />
-          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
+          <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
         <div class="my-2 ">
-          <UInputNumber class="w-full" size="xl" v-model="amount" :min="1" :max="100" Label="Anzahl"/>
-          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
+          <URadioGroup class="w-full" variant="card" v-model="dd_status_sel" :items="dd_status"/>
+          <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
 
         <div class="my-2 flex justify-between items-center">
@@ -178,7 +209,7 @@ const addFilament = async () => {
         
         <div class="my-2">
           <UInputMenu class="w-full" size="xl" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
-          <p class="text-red-600 text-xs mt-0 pl-2">required</p>
+          <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
         <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
           Add Filament
