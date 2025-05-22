@@ -155,7 +155,7 @@ const addFilament = async () => {
       <div class="flex justify-start items-center mb-4 md:w-1/3 w-full">
         <UButton to="/">Back</UButton>
       </div>
-      <div class="flex flex-col h-fit w-80 p-4 bg-neutral-800 shadow-2xl dark:shadow-neutral-200 rounded-xl">
+      <div class="flex flex-col h-fit w-80 p-4  bg-neutral-400 dark:bg-neutral-800 shadow-2xl dark:shadow-neutral-200 rounded-xl">
         <h2 class="text-2xl text-center mb-5">Add new Filament</h2>
         <h3 class="text-center mb-5">
           Please enter the filament details:
