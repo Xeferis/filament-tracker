@@ -1,92 +1,27 @@
 <script setup lang="ts">
 import type { RadioGroupItem, RadioGroupValue } from '@nuxt/ui'
+import colorList from '~/composables/colorList'
+import manufacturerList from '~/composables/manufacturerList'
+import materialsList from '~/composables/materialsList'
+import statusList from '~/composables/statusList'
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
 const status = ref()
 const item_number = ref()
 const refill = ref(false)
-const manufacturer = ref([
-  'BambuLab',
-  '3DXTech',
-  'PolyMaker',
-  'Raise 3D',
-  'Formfutura',
-  'Flashforge',
-  'Azurefilm',
-  'eSun',
-  'Extrudr',
-  'TreeD',
-  'PPprint',
-  'Zaxe',
-])
+const manufacturer = ref(manufacturerList())
 const manu_selected = ref()
-const color = ref([
-  'Schwarz',
-  'Weiß',
-  'Blau',
-  'Grün',
-  'Rot',
-  'Grau',
-  'Orange',
-  'Natur',
-  'Gelb',
-  'Transparent',
-  'Lila',
-  'Silber',
-  'Braun',
-  'Pink',
-  'Gold',
-  'Türkis',
-  'Beige',
-  'Bronze',
-  'Schwarz-Rot',
-])
+const color = ref(colorList())
 const clr_selected = ref()
-const material = ref([
-  'PLA',
-  'PLA-CF',
-  'PETG',
-  'PETG-CF',
-  'ABS',
-  'Flexibel TPU/TPE',
-  'Nylon (PA)',
-  'Carbonfaser',
-  'ASA',
-  'PLA Max',
-  'PLA Silk',
-  'PVA/BVOH/BreakAway',
-  'Glasfaser',
-  'PVB',
-  'Flexible',
-  'PETG Max',
-  'PC',
-  'PP',
-  'PC-ABS',
-  'Wood',
-  'PPS',
-  'PC-FR',
-])
+const material = ref(materialsList())
 const mtrl_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
 const dd_status_sel = ref<RadioGroupValue>(1)
 
 
-const dd_status = ref<RadioGroupItem[]>([
-  {
-    label: 'Bestellung geplant',
-    value: 1,
-  },
-  {
-    label: 'Bestellt',
-    value: 2,
-  },
-  {
-    label: 'Eingelagert',
-    value: 3,
-  },
-])
+const dd_status = ref<RadioGroupItem[]>(statusList())
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     dd_loading.value = true
