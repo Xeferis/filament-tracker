@@ -259,9 +259,7 @@ onUnmounted(() => {
       <div class="flex w-full my-2 mb-2 justify-center items-center">
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
-          width="400"
-          height="400"
-          fit="contain"
+          sizes="250px md:400px"
           :alt="modal_item_number"
           class="rounded-lg"
           :custom="true"
