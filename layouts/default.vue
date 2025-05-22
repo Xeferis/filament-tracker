@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ChangeColor from '~/components/ChangeColor.vue'
+
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
@@ -20,6 +22,7 @@ const LogOut = async () => {
         <p>logged in as:</p>
         <p class="text-primary">{{ user?.email }}</p>
       </div>
+      <ChangeColor />
       <UButton @click="LogOut">LogOut</UButton>
     </div>
     <slot />
