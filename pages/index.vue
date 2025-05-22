@@ -262,7 +262,7 @@ onUnmounted(() => {
           sizes="200px md:400px"
           :alt="modal_item_number"
           class="rounded-lg"
-          placeholder="../public/placeholder.jpg"
+          placeholder="./placeholder.jpg"
         />
       </div>
       <div>
