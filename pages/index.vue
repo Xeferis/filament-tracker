@@ -277,7 +277,7 @@ onUnmounted(() => {
           <img
             v-else
             sizes="200px md:400px"
-            src="placeholder.jpg"
+            src="../public/placeholder.jpg"
             alt="placeholder"
           >
         </NuxtImg>
