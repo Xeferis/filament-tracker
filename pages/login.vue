@@ -21,7 +21,7 @@ const signIn = async () => {
 <template>
   <div class="flex flex-col w-full h-full justify-center items-center">
     <h1 class="text-4xl md:text-7xl text-center mb-16">Filament Tracker</h1>
-    <div class="flex flex-col h-fit w-80 p-4 bg-neutral-800 shadow-2xl shadow-neutral-200 rounded-xl">
+    <div class="flex flex-col h-fit w-80 p-4 bg-neutral-800 shadow-2xl dark:shadow-neutral-200 rounded-xl">
       <h2 class="text-2xl text-center mb-5">Sign In</h2>
       <h3 class="text-center mb-5">
         Please enter your credentials:
