@@ -3,7 +3,8 @@
 const supabase = useSupabaseClient()
 const dd_loading = ref(false)
 const type = ref('')
-const amount = ref(1)
+const status = ref(1)
+const item_number = ref()
 const refill = ref(false)
 const manufacturer = ref([
   'BambuLab',
@@ -67,6 +68,26 @@ const material = ref([
 const mtrl_selected = ref()
 const dd_selected = ref()
 const dd_value = ref([])
+const dd_status_sel = ref({
+  label: 'Bestellung geplant',
+  value: 1,
+})
+
+
+const dd_status = ref([
+  {
+    label: 'Bestellung geplant',
+    value: 1,
+  },
+  {
+    label: 'Bestellt',
+    value: 2,
+  },
+  {
+    label: 'Eingelagert',
+    value: 3,
+  },
+])
 
 const { data: options, pending, error } = await useAsyncData('supabase-options', async () => {
     dd_loading.value = true
@@ -88,10 +109,11 @@ const { data: options, pending, error } = await useAsyncData('supabase-options',
 })
 
 interface Filament {
+  item_number: string
   type: string
   color: string
   material: string
-  amount: number
+  status: number
   refill: boolean
   manufacturer: string
   location_id: number
@@ -100,12 +122,13 @@ interface Filament {
 const errortoast = useToast()
 
 const addFilament = async () => {
-  if (type.value && amount.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
+  if (type.value && status.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
     const { data, error } = await supabase
     .from('filaments')
     .insert<Filament>({
       type: type.value,
-      amount: amount.value,
+      item_number: item_number.value,
+      status: dd_status_sel.value,
       color: clr_selected.value,
       material: mtrl_selected.value,
       refill: refill.value,
@@ -160,6 +183,15 @@ const addFilament = async () => {
           <UInput
             size="xl"
             class="w-full" 
+            placeholder="Artikelnummer"
+            v-model="item_number"
+          />
+        </div>
+
+        <div class="my-2">
+          <UInput
+            size="xl"
+            class="w-full" 
             placeholder="Bezeichnung"
             v-model="type"
           />
@@ -167,7 +199,7 @@ const addFilament = async () => {
         </div>
 
         <div class="my-2 ">
-          <UInputNumber class="w-full" size="xl" v-model="amount" :min="1" :max="100" Label="Anzahl"/>
+          <UInputMenu class="w-full" size="xl" v-model="dd_status_sel" placeholder="Select status" :items="dd_status"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
