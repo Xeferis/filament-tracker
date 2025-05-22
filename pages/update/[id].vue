@@ -16,18 +16,18 @@ const { data: filaments_selected} = await useAsyncData('filaments_selected', asy
 console.log(filaments_selected.value[0]) //#DEBUG
 
 const dd_loading = ref(false)
-const type = ref(filaments_selected.value.type)
-const item_number = ref(filaments_selected.value.item_number)
-const refill = ref(filaments_selected.value.refill)
+const type = ref(filaments_selected.value[0].type)
+const item_number = ref(filaments_selected.value[0].item_number)
+const refill = ref(filaments_selected.value[0].refill)
 const manufacturer = ref(manufacturerList())
-const manu_selected = ref(filaments_selected.value.manufacturer)
+const manu_selected = ref(filaments_selected.value[0].manufacturer)
 const color = ref(colorList())
-const clr_selected = ref(filaments_selected.value.color)
+const clr_selected = ref(filaments_selected.value[0].color)
 const material = ref(materialsList())
-const mtrl_selected = ref(filaments_selected.value.material)
-const dd_selected = ref(filaments_selected.value.location_id)
+const mtrl_selected = ref(filaments_selected.value[0].material)
+const dd_selected = ref(filaments_selected.value[0].location_id)
 const dd_value = ref([])
-const dd_status_sel = ref<RadioGroupValue>(filaments_selected.value.status)
+const dd_status_sel = ref<RadioGroupValue>(filaments_selected.value[0].status)
 
 
 const dd_status = ref<RadioGroupItem[]>(statusList())
