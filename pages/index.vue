@@ -262,8 +262,25 @@ onUnmounted(() => {
           sizes="200px md:400px"
           :alt="modal_item_number"
           class="rounded-lg"
-          placeholder="./placeholder.jpg"
-        />
+          :custom="true"
+          v-slot="{ src, isLoaded, imgAttrs }"
+        >
+          <!-- Show the actual image when loaded -->
+          <img
+            v-if="isLoaded"
+            v-bind="imgAttrs"
+            :src="src"
+          >
+
+          <!-- Show a placeholder while loading -->
+          <img
+            v-else
+            v-bind="imgAttrs"
+            class="md:w-[400px] w-[200px] rounded-lg"
+            src="../public/placeholder.jpg"
+            alt="placeholder"
+          >
+        </NuxtImg>
       </div>
       <div>
         <div class="flex justify-between items-center mb-2">
