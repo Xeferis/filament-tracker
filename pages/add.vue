@@ -119,7 +119,7 @@ interface Filament {
 const errortoast = useToast()
 
 const addFilament = async () => {
-  if (type.value && status.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
+  if (type.value && dd_status_sel.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
     const { data, error } = await supabase
     .from('filaments')
     .insert<Filament>({
@@ -196,7 +196,7 @@ const addFilament = async () => {
         </div>
 
         <div class="my-2 ">
-          <UInputMenu class="w-full" size="xl" v-model="dd_status_sel" placeholder="Select status" :items="dd_status"/>
+          <URadioGroup  class="w-full" size="xl" v-model="dd_status_sel" :items="dd_status"/>
           <p class="text-red-600 text-xs mt-0 pl-2">required</p>
         </div>
 
