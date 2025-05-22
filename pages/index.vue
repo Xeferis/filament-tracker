@@ -173,14 +173,15 @@ function onSelect(row: TableRow<filament>, e?: Event) {
   open_modal.value = !open_modal.value
   modal_id.value = row.original.id
   modal_item_number.value = row.original.item_number
-  modal_location.value = row.getValue('locations.description')
+  modal_location.value = row.original.location
   modal_type.value = row.original.type
   modal_color.value = row.original.color
   modal_material.value = row.original.material
   modal_status.value = row.original.status
   modal_refill.value = row.original.refill
   modal_manufacturer.value = row.original.manufacturer
-  console.log(row.original.id)
+  console.log(row.original)
+  console.log(row)
   console.log(e)
 }
 
