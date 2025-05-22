@@ -260,27 +260,10 @@ onUnmounted(() => {
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
           sizes="200px md:400px"
-          :placeholder="[50, 25, 75, 5]"
           :alt="modal_item_number"
           class="rounded-lg"
-          :custom="true"
-          v-slot="{ src, isLoaded, imgAttrs }"
-        >
-          <!-- Show the actual image when loaded -->
-          <img
-            v-if="isLoaded"
-            v-bind="imgAttrs"
-            :src="src"
-          >
-
-          <!-- Show a placeholder while loading -->
-          <img
-            v-else
-            v-bind="imgAttrs"
-            src="../public/placeholder.jpg"
-            alt="placeholder"
-          >
-        </NuxtImg>
+          placeholder="../public/placeholder.jpg"
+        />
       </div>
       <div>
         <div class="flex justify-between items-center mb-2">
