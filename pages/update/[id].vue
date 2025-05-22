@@ -23,7 +23,10 @@ const color = ref(colorList())
 const clr_selected = ref(filaments_selected.value[0].color)
 const material = ref(materialsList())
 const mtrl_selected = ref(filaments_selected.value[0].material)
-const dd_selected = ref(filaments_selected.value[0].locations.description)
+const dd_selected = ref({
+    label: filaments_selected.value[0].locations.description,
+    value: filaments_selected.value[0].locations.id,
+})
 const dd_value = ref([])
 const dd_status_sel = ref<RadioGroupValue>(filaments_selected.value[0].status)
 
