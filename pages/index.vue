@@ -180,7 +180,7 @@ function onSelect(row: TableRow<filament>, e?: Event) {
   modal_status.value = row.original.status
   modal_refill.value = row.original.refill
   modal_manufacturer.value = row.original.manufacturer
-  console.log(row.original)
+  console.log(row.original.locations.description)
   console.log(row)
   console.log(e)
 }
