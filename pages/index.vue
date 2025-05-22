@@ -257,14 +257,6 @@ onUnmounted(() => {
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
     <template #body>
       <div class="flex w-full my-2 mb-2 justify-center items-center">
-        <NuxtPicture
-          format="avif,webp"
-          :src="`filaments/${modal_item_number}.png`"
-          :alt="modal_item_number"
-          :imgAttrs="{
-            class: 'rounded-lg',
-          }"
-        />
         <NuxtImg
           :src="`filaments/${modal_item_number}.png`"
           :alt="modal_item_number"
