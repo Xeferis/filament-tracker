@@ -176,33 +176,6 @@ const sorting = ref([
 
 const errortoast = useToast()
 
-async function updateStatusFilament(id: string) {
-  const { error } = await supabase
-    .from('filaments')
-    .update({
-      status: modal_status.value,
-    })
-    .eq('id', id)
-
-  if (error) {
-    console.error('Error updating filament:', error)
-    errortoast.add({
-      title: 'Fehler',
-      description: 'Fehler beim Aktualisieren des Filaments',
-      color: 'error',
-    })
-  } else {
-    errortoast.add({
-      title: 'Erfolg',
-      description: 'Filament erfolgreich aktualisiert',
-      color: 'success',
-    })
-    // Refresh the data after update
-    refreshNuxtData('filaments')
-    open_modal.value = false
-  }
-}
-
 function switchModal() {
   open_modal.value = !open_modal.value
   open_modal_del.value = !open_modal_del.value
