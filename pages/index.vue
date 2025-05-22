@@ -9,7 +9,7 @@ const open_modal = ref(false)
 const open_modal_del = ref(false)
 
 const { data: filaments, refresh: refreshFilaments } = await useAsyncData('filaments', async () => {
-  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number color, material, locations(description)")
+  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(description)")
   return data
 })
 
