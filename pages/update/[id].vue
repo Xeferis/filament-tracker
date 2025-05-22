@@ -9,11 +9,9 @@ import statusList from '~/composables/statusList'
 const supabase = useSupabaseClient()
 
 const { data: filaments_selected} = await useAsyncData('filaments_selected', async () => {
-  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(description)").eq('id', id).limit(1)
+  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(id)").eq('id', id).limit(1)
   return data
 })
-
-console.log(filaments_selected.value[0]) //#DEBUG
 
 const dd_loading = ref(false)
 const type = ref(filaments_selected.value[0].type)
@@ -25,7 +23,7 @@ const color = ref(colorList())
 const clr_selected = ref(filaments_selected.value[0].color)
 const material = ref(materialsList())
 const mtrl_selected = ref(filaments_selected.value[0].material)
-const dd_selected = ref(filaments_selected.value[0].location_id)
+const dd_selected = ref(filaments_selected.value[0].locations.id)
 const dd_value = ref([])
 const dd_status_sel = ref<RadioGroupValue>(filaments_selected.value[0].status)
 
@@ -67,18 +65,28 @@ const errortoast = useToast()
 
 const updateFilament = async () => {
     if (type.value && dd_status_sel.value && clr_selected.value && mtrl_selected.value && manu_selected.value && dd_selected.value.value) {
-        const { error } = await supabase
-            .from('filaments')
-            .update({
-                type: type.value,
-                item_number: item_number.value,
-                status: dd_status_sel.value,
-                color: clr_selected.value,
-                material: mtrl_selected.value,
-                refill: refill.value,
-                manufacturer: manu_selected.value,
-                location: dd_selected.value.value,
-            })
+        console.log('update filament')
+        console.log(type.value)
+        console.log(item_number.value)
+        console.log(dd_status_sel.value)
+        console.log(clr_selected.value)
+        console.log(mtrl_selected.value)
+        console.log(refill.value)
+        console.log(manu_selected.value)
+        console.log(dd_selected.value.value)
+
+        //const { error } = await supabase
+        //    .from('filaments')
+        //    .update({
+        //        type: type.value,
+        //        item_number: item_number.value,
+        //        status: dd_status_sel.value,
+        //        color: clr_selected.value,
+        //        material: mtrl_selected.value,
+        //        refill: refill.value,
+        //        manufacturer: manu_selected.value,
+        //        location: dd_selected.value.value,
+        //    })
             .eq('id', id)
 
         if (error) {
