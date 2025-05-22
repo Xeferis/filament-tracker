@@ -9,7 +9,7 @@ import statusList from '~/composables/statusList'
 const supabase = useSupabaseClient()
 
 const { data: filaments_selected} = await useAsyncData('filaments_selected', async () => {
-  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(id)").eq('id', id).limit(1)
+  const { data } = await supabase.from('filaments').select("id, type, refill, manufacturer, status, item_number, color, material, locations(*)").eq('id', id).limit(1)
   return data
 })
 
@@ -23,7 +23,7 @@ const color = ref(colorList())
 const clr_selected = ref(filaments_selected.value[0].color)
 const material = ref(materialsList())
 const mtrl_selected = ref(filaments_selected.value[0].material)
-const dd_selected = ref(filaments_selected.value[0].locations.id)
+const dd_selected = ref(filaments_selected.value[0].locations.description)
 const dd_value = ref([])
 const dd_status_sel = ref<RadioGroupValue>(filaments_selected.value[0].status)
 
@@ -75,18 +75,18 @@ const updateFilament = async () => {
         console.log(manu_selected.value)
         console.log(dd_selected.value.value)
 
-        //const { error } = await supabase
-        //    .from('filaments')
-        //    .update({
-        //        type: type.value,
-        //        item_number: item_number.value,
-        //        status: dd_status_sel.value,
-        //        color: clr_selected.value,
-        //        material: mtrl_selected.value,
-        //        refill: refill.value,
-        //        manufacturer: manu_selected.value,
-        //        location: dd_selected.value.value,
-        //    })
+        const { error } = await supabase
+            .from('filaments')
+            .update({
+                type: type.value,
+                item_number: item_number.value,
+                status: dd_status_sel.value,
+                color: clr_selected.value,
+                material: mtrl_selected.value,
+                refill: refill.value,
+                manufacturer: manu_selected.value,
+                location: dd_selected.value.value,
+            })
             .eq('id', id)
 
         if (error) {
