@@ -55,7 +55,7 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'locations.description',
-    header: ({ column }) => getHeader(column, 'Ort der Lagerung'),
+    header: ({ column }) => getHeader(column, 'Ort'),
   },
   {
     accessorKey: 'type',
@@ -93,7 +93,7 @@ const columns: TableColumn<filament>[] = [
   },
   {
     accessorKey: 'refill',
-    header: ({ column }) => getHeader(column, 'Refill Roll'),
+    header: ({ column }) => getHeader(column, 'Refill'),
     cell: ({ row }) => {
       const color = {
         true: 'success' as const,
