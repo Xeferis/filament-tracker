@@ -48,7 +48,10 @@ const columns: TableColumn<filament>[] = [
   {
     accessorKey: 'item_number',
     header: ({ column }) => getHeader(column, 'Artikelnummber'),
-    cell: ({ row }) => h(UAvatar, { src: `filaments/${row.getValue('item_number')}.jpg`, alt: row.getValue('item_number'), size: 'md', class: 'mr-2' }, () => row.getValue('item_number'))
+    cell: ({ row }) => h('div', { class: 'flex items-center gap-3' }, [
+      h(UAvatar, { src: `filaments/${row.getValue('item_number')}.jpg`, alt: row.getValue('item_number'), size: 'md', class: 'mr-2' }),
+      h('p', {}, row.getValue('item_number'))
+    ])
   },
   {
     accessorKey: 'locations.description',
