@@ -40,7 +40,7 @@ const signIn = async () => {
         v-model="password"
         type="password"
       />
-      <UButton size="xl" class="mt-5 justify-center" @click="signIn">
+      <UButton size="xl" class="mt-5 justify-center" loading-auto @click="signIn">
         Sign In
       </UButton>
     </div>
