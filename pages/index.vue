@@ -258,7 +258,7 @@ onUnmounted(() => {
     <template #body>
       <div class="flex w-full my-2 mb-2 justify-center items-center">
         <NuxtImg
-          :src="`filaments/${modal_item_number}.png`"
+          :src="`filaments/${modal_item_number}.jpg`"
           sizes="200px md:400px"
           :alt="modal_item_number"
           class="rounded-lg"
