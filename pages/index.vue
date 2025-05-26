@@ -314,11 +314,15 @@ onUnmounted(() => {
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Status:</p>
-          <p class="text-primary">{{ modal_status }}</p>
+          <UBadge class="ml-2" variant="subtle" :color="modal_status === 1 ? 'neutral' : modal_status === 2 ? 'warning' : 'secondary'">
+            {{ modal_status === 1 ? 'Bestellung geplant' : modal_status === 2 ? 'Bestellt' : 'Eingelagert' }}
+          </UBadge>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Refill Roll:</p>
-          <p class="text-primary">{{ modal_refill }}</p>
+          <UBadge class="ml-2" variant="subtle" :color="modal_refill ? 'success' : 'error'">
+            {{ modal_refill ? 'Ja' : 'Nein' }}
+          </UBadge>
         </div>
         <div class="flex justify-between items-center mb-2">
           <p>Hersteller:</p>
