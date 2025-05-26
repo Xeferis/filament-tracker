@@ -3,10 +3,12 @@ import type { TableColumn, TableRow } from '@nuxt/ui'
 import type { Column } from '@tanstack/vue-table'
 import type { RealtimeChannel } from '@supabase/supabase-js'
 import { h, resolveComponent } from 'vue'
+import { UAvatar } from '#components'
 let realtimeChannel: RealtimeChannel
 const UBadge = resolveComponent('UBadge')
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
+const UAvatar = resolveComponent('UAvatar')
 
 const supabase = useSupabaseClient()
 const open_modal = ref(false)
@@ -46,6 +48,7 @@ const columns: TableColumn<filament>[] = [
   {
     accessorKey: 'item_number',
     header: ({ column }) => getHeader(column, 'Artikelnummber'),
+    cell: ({ row }) => h(UAvatar, { src: `filaments/${row.getValue('item_number')}.jpg`, alt: row.getValue('item_number'), size: 'md', class: 'mr-2' }, () => row.getValue('item_number'))
   },
   {
     accessorKey: 'locations.description',
