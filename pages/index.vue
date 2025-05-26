@@ -320,7 +320,7 @@ onUnmounted(() => {
         </div>
         <div class="flex justify-between items-center mt-4">
           <UButton @click="switchModal()" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
-          <UButton :to="'/update/' + modal_id" icon="i-lucide-book-up" color="info" variant="soft">Update</UButton>
+          <UButton :to="'/update/' + modal_id" icon="i-lucide-book-up" color="info" variant="soft">Edit</UButton>
         </div>
       </div>
     </template>
