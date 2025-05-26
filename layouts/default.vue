@@ -24,7 +24,7 @@ const LogOut = async () => {
       </div>
       <div class="flex gap-2 md:gap-4">
         <ChangeColor />
-        <UButton @click="LogOut">LogOut</UButton>
+        <UButton loading-auto @click="LogOut">LogOut</UButton>
       </div>
     </div>
     <slot />

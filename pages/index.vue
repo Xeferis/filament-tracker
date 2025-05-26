@@ -250,8 +250,8 @@ onUnmounted(() => {
       </div>
     </template>
     <template #footer>
-      <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" size="xl" color="error" variant="soft">Delete</UButton>
-      <UButton @click="switchModal()" color="neutral" size="xl" variant="soft">Cancel</UButton>
+      <UButton @click="deleteFilament(modal_id)" icon="i-lucide-trash" size="xl" color="error" variant="soft" loading-auto>Delete</UButton>
+      <UButton @click="switchModal()" color="neutral" size="xl" variant="soft" loading-auto>Cancel</UButton>
     </template>
   </UModal>
   <UModal :dismissible="false" v-model:open="open_modal" title="Filament Details">
@@ -319,8 +319,8 @@ onUnmounted(() => {
           <p class="text-primary">{{ modal_manufacturer }}</p>
         </div>
         <div class="flex justify-between items-center mt-4">
-          <UButton @click="switchModal()" icon="i-lucide-trash" color="error" variant="soft">Delete</UButton>
-          <UButton :to="'/update/' + modal_id" icon="i-lucide-book-up" color="info" variant="soft">Edit</UButton>
+          <UButton @click="switchModal()" icon="i-lucide-trash" color="error" loading-auto variant="soft">Delete</UButton>
+          <UButton :to="'/update/' + modal_id" icon="i-lucide-book-up" color="info" variant="soft" loading-auto>Edit</UButton>
         </div>
       </div>
     </template>

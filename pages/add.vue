@@ -146,7 +146,7 @@ const addFilament = async () => {
           <USelectMenu class="w-full" size="xl" :loading="dd_loading" v-model="dd_selected" placeholder="Select location" :items="dd_value"/>
           <p class="text-red-600 text-xs mt-1 pl-2">required</p>
         </div>
-        <UButton size="xl" class="mt-5 justify-center" @click="addFilament">
+        <UButton size="xl" class="mt-5 justify-center" loading-auto @click="addFilament">
           Add Filament
         </UButton>
       </div>
