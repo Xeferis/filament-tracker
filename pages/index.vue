@@ -209,7 +209,7 @@ async function deleteFilament(id: string) {
   }
 }
 
-const globalFilter = ref('')
+const globalFilter = useCookie('globalFilter')
 
 const rowSelection = ref<Record<string, boolean>>({})
 
