@@ -1,8 +1,11 @@
 export default function () {
   const mat = [
     "PLA",
+    "PLA Matte",
+    "PLA Metal",
     "PLA-CF",
     "PETG",
+    "PETG Translucent",
     "PETG-HF",
     "PETG-CF",
     "ABS",
